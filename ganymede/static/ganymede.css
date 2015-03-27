@@ -173,6 +173,7 @@
 #ganymede-console-tabs li {
   list-style: none;
   float: left;
+  border-radius: 0;
   background: #e7e7e7;
 }
 
