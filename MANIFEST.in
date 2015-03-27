@@ -2,5 +2,7 @@ include COPYING*
 
 include requirements.txt
 
+exclude *.svg
+
 recursive-include ganymede/static *.svg *.css *.js
 recursive-exclude ganymede/static *.coffee
