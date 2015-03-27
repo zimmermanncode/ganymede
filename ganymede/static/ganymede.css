@@ -242,8 +242,12 @@
 }
 
 #notebook {
-  padding-top: 0;
+  padding: 0;
   margin-top: 40px;
+}
+
+.end_space {
+  display: none;
 }
 
 #notebook .out_prompt_overlay {
