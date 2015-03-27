@@ -1,0 +1,1 @@
+ipython[notebook] >= 3.0 #import IPython
