@@ -26,5 +26,12 @@ SVG = DIR / 'ganymede.svg'
 
 CSS = DIR / 'ganymede.css'
 
-JS = DIR / 'ganymede.js'
 COFFEE = DIR / 'ganymede.coffee'
+JS = DIR / 'ganymede.js'
+
+
+if COFFEE.exists(): #==> development mode (not installed) ==> compile
+    # import conditionally to avoid general dependency
+    from coffeetools import coffee
+
+    JS.write_text(coffee.compile(COFFEE.text(), bare=True))
