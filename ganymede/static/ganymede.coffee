@@ -20,27 +20,48 @@
 
 class Ganymede
     constructor: (logo_src) ->
-        $_ = $('#ganymede')
-        if not $_.length
-            $_ = $('<div id="ganymede"></div>')
-        $('body').append $_
-        $.extend @, $_
+        @$_ = $('#ganymede')
+        if not @$_.length
+            @$_ = $('<div id="ganymede"></div>')
+        $('body').append @$_
 
         @$_logo = $('#ganymede-logo')
         if not @$_logo.length
             @$_logo = $('<img id="ganymede-logo" />')
-        @append @$_logo
+        @$_.append @$_logo
         @$_logo[0].src = "#{logo_src}"
         @$_logo.addClass('ui-resizable-handle ui-resizable-se')
 
-        @append @$_menubar = $('#menubar')
-        @append @$_toolbar = $('#maintoolbar')
+        @$_.append @$_menubar = $('#menubar')
+        @$_.append @$_toolbar = $('#maintoolbar')
 
-        @resizable
+        @prevent_toggle = false
+
+        @$_.resizable
             handles:
-                se: '#ganymede-logo'
+                se: @$_logo
             resize: =>
                 @update()
+                @prevent_toggle = true
+
+        @$_logo.off 'click'
+        @$_logo.click =>
+            if @prevent_toggle
+                @prevent_toggle = false
+                return
+            if @vertical
+                @$_.css
+                    width: if @$_.outerWidth() != @width
+                        @width
+                    else
+                        @$_logo.outerWidth(true)
+            else
+                @$_.css
+                    height: if @$_.outerHeight() != @height
+                        @height
+                    else
+                        @$_logo.outerHeight(true)
+
         @update()
 
         @$_console = $('#ipython-main-app')
@@ -82,7 +103,7 @@ class Ganymede
             $('.output_wrapper', @).draggable
                 handle: '.out_prompt_overlay'
                 start: ->
-                    @console_height = $('#ipython-main-app').height()
+                    @consoleHeight = $('#ipython-main-app').height()
                     $('#ipython-main-app').height(0)
                     $_ = $(@)
                     $_.addClass 'ganymede'
@@ -93,15 +114,17 @@ class Ganymede
                         $(output).css 'z-index', 200 + index
                     $_.css 'z-index', 200 + index
                 stop: ->
-                    $('#ipython-main-app').height(@console_height)
+                    $('#ipython-main-app').height(@consoleHeight)
 
     update: ->
-        horizontal = not (vertical = @outerHeight() > @outerWidth())
+        @width = @$_.outerWidth()
+        @height = @$_.outerHeight()
+        @horizontal = not (@vertical = @$_.outerHeight() > @$_.outerWidth())
         for $_ in [@$_menubar, @$_toolbar]
-            $_.toggleClass 'vertical', vertical
-            $_.toggleClass 'horizontal', horizontal
+            $_.toggleClass 'vertical', @vertical
+            $_.toggleClass 'horizontal', @horizontal
         $_groups = $('.btn-group', @$_toolbar)
-        if horizontal
+        if @horizontal
             group_widths = for group in $_groups
                 $_buttons = $('.btn', group)
                 width = 6 + $_buttons.length * ($_buttons.outerWidth(true))
