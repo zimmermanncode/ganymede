@@ -116,17 +116,21 @@ class Ganymede
                 handle: '.out_prompt_overlay'
                 start: ->
                     $_console = window.ganymede.$_console
-                    window.ganymede.consoleHeight = $_console.outerHeight()
-                    $_console.height 0
-                    $_console.addClass 'collapsed'
+                    if not $_console.hasClass 'collapsed'
+                        window.ganymede.consoleHeight \
+                          = $_console.outerHeight()
+                        $_console.height 0
+                        $_console.addClass 'collapsed'
                     $_ = $(@)
                     $_.addClass 'ganymede'
-                    $_.css 'z-index', 999
+                    $_.css 'z-index', -1
                     $_outputs = $('.output_wrapper.ganymede').sort (l, r) ->
                         ($(l).css 'z-index') - ($(r).css 'z-index')
+                    z = -2 - $_outputs.length
+                    $('body').css 'z-index', z - 1
                     for output, index in $_outputs
-                        $(output).css 'z-index', 200 + index
-                    $_.css 'z-index', 200 + index
+                        $(output).css 'z-index', z + index
+                    $_.css 'z-index', z + index
                 stop: ->
                     $_console = window.ganymede.$_console
                     $_console.height window.ganymede.consoleHeight
