@@ -21,14 +21,21 @@ import sys
 from base64 import b64encode
 import json
 
-from IPython.display import display, HTML
+__version__ = '0.1.dev'
 
 
 def load():
+    """Generate and return Ganymede HTML containing CSS and JavaScript
+       for modifying the Jupyter notebook web interface.
+    """
     # make sure that .static pkg gets reloaded on %reload_ext ganymede
     # to recompile ganymede.coffee in development (non-installed) mode
     sys.modules.pop('ganymede.static', None)
     from ganymede.static import CSS, JS, SVG
+
+    # import locally to make this module importable in setup.py
+    # without further dependencies
+    from IPython.display import HTML
 
     return HTML("""
       <style type="text/css">%s</style>
@@ -42,4 +49,10 @@ def load():
 
 
 def load_ipython_extension(shell):
+    """Called on ``%load_ext ganymede`` and ``%reload_ext ganymede``
+    """
+    # import locally to make this module importable in setup.py
+    # without further dependencies
+    from IPython.display import display
+
     display(load())
