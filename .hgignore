@@ -1,0 +1,11 @@
+~$
+\.pyc$
+
+\.diff$
+
+\.egg-info/
+^dist/
+
+^node_modules/
+
+^\.ipynb
