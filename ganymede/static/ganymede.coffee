@@ -35,17 +35,17 @@ class Ganymede
         @$_.append @$_menubar = $('#menubar')
         @$_.append @$_toolbar = $('#maintoolbar')
 
-        @prevent_toggle = false
         @$_.resizable
             handles:
                 se: @$_logo
             resize: =>
-                @prevent_toggle = true
+                @preventToggle = true
                 @update()
+
         @$_logo.off 'click'
         @$_logo.click =>
-            if @prevent_toggle
-                @prevent_toggle = false
+            if @preventToggle
+                @preventToggle = false
                 return
             if @vertical
                 @$_.css
@@ -59,6 +59,8 @@ class Ganymede
                         @height
                     else
                         @$_logo.outerHeight true
+
+        @preventToggle = false
         @update()
 
         @$_console = $('#ipython-main-app')
@@ -73,7 +75,7 @@ class Ganymede
                 ui-resizable-handle ui-resizable-#{handle}
                 """
             @$_console.append handles[handle] = $_
-        @preventConsoleToggle = false
+
         @$_console.resizable
             handles: handles
             start: (event) ->
@@ -85,6 +87,7 @@ class Ganymede
                         left: @offsetX + event.pageX - @mouseX
             stop: =>
                 @preventConsoleToggle = true
+
         handle = @$_console.handles.s
         handle.off 'click'
         handle.click =>
@@ -97,6 +100,8 @@ class Ganymede
                 @$_console.height 0
             else
                 @$_console.height @consoleHeight
+
+        @preventConsoleToggle = false
 
         @$_tabs = $('#ganymede-console-tabs')
         if not @$_tabs.length
