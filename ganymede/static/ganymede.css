@@ -27,8 +27,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 30px;
-  height: 119px;
+  min-width: 48px;
+  min-height: 48px;
   border-bottom-right-radius: 48px;
   background-color: #777;
 }
