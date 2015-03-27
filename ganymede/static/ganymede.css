@@ -148,28 +148,37 @@
 }
 
 #ipython-main-app {
+  border-top: none;
+  border-radius: 0;
   position: absolute;
+  padding-top: 0;
   box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
+}
+
+#ganymede-console-tabs {
+  border-top: none;
+  border-radius: 0;
+  width: 100%;
+  padding: 0;
+  background: #333;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #ipython-main-app.collapsed #ganymede-console-tabs {
   display: none;
 }
 
-#ganymede-console-tabs {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
 #ganymede-console-tabs li {
   list-style: none;
   float: left;
+  background: #e7e7e7;
 }
 
 #kernel_indicator {
   border: none;
+  margin: 0;
 }
 
 #kernel_logo_widget {
