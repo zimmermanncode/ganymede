@@ -36,14 +36,12 @@ class Ganymede
         @$_.append @$_toolbar = $('#maintoolbar')
 
         @prevent_toggle = false
-
         @$_.resizable
             handles:
                 se: @$_logo
             resize: =>
-                @update()
                 @prevent_toggle = true
-
+                @update()
         @$_logo.off 'click'
         @$_logo.click =>
             if @prevent_toggle
@@ -54,14 +52,13 @@ class Ganymede
                     width: if @$_.outerWidth() != @width
                         @width
                     else
-                        @$_logo.outerWidth(true)
+                        @$_logo.outerWidth true
             else
                 @$_.css
                     height: if @$_.outerHeight() != @height
                         @height
                     else
-                        @$_logo.outerHeight(true)
-
+                        @$_logo.outerHeight true
         @update()
 
         @$_console = $('#ipython-main-app')
@@ -76,6 +73,7 @@ class Ganymede
                 ui-resizable-handle ui-resizable-#{handle}
                 """
             @$_console.append handles[handle] = $_
+        @preventConsoleToggle = false
         @$_console.resizable
             handles: handles
             start: (event) ->
@@ -85,6 +83,20 @@ class Ganymede
                 if $(@).data('ui-resizable').axis == 's'
                     $(@).css
                         left: @offsetX + event.pageX - @mouseX
+            stop: =>
+                @preventConsoleToggle = true
+        handle = @$_console.handles.s
+        handle.off 'click'
+        handle.click =>
+            if @preventConsoleToggle
+                @preventConsoleToggle = false
+                return
+            @$_console.toggleClass 'collapsed'
+            if @$_console.hasClass 'collapsed'
+                @consoleHeight = @$_console.outerHeight()
+                @$_console.height 0
+            else
+                @$_console.height @consoleHeight
 
         @$_tabs = $('#ganymede-console-tabs')
         if not @$_tabs.length
@@ -103,8 +115,10 @@ class Ganymede
             $('.output_wrapper', @).draggable
                 handle: '.out_prompt_overlay'
                 start: ->
-                    @consoleHeight = $('#ipython-main-app').height()
-                    $('#ipython-main-app').height(0)
+                    $_console = window.ganymede.$_console
+                    window.ganymede.consoleHeight = $_console.outerHeight()
+                    $_console.height 0
+                    $_console.addClass 'collapsed'
                     $_ = $(@)
                     $_.addClass 'ganymede'
                     $_.css 'z-index', 999
@@ -114,7 +128,9 @@ class Ganymede
                         $(output).css 'z-index', 200 + index
                     $_.css 'z-index', 200 + index
                 stop: ->
-                    $('#ipython-main-app').height(@consoleHeight)
+                    $_console = window.ganymede.$_console
+                    $_console.height window.ganymede.consoleHeight
+                    $_console.removeClass 'collapsed'
 
     update: ->
         @width = @$_.outerWidth()
@@ -127,10 +143,10 @@ class Ganymede
         if @horizontal
             group_widths = for group in $_groups
                 $_buttons = $('.btn', group)
-                width = 6 + $_buttons.length * ($_buttons.outerWidth(true))
+                width = 6 + $_buttons.length * ($_buttons.outerWidth true)
                 $(group).css
                     width: width
-                $(group).outerWidth(true)
+                $(group).outerWidth true
             @$_toolbar.css
                 width: group_widths.reduce (l, r) -> l + r
         else
