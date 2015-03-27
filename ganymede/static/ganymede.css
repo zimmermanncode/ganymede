@@ -1,0 +1,238 @@
+/* ganymede
+ *
+ * Hacking Jupyter's atmosphere
+ *
+ * Copyright (C) 2015 Stefan Zimmermann <zimmermann.code@gmail.com>
+ *
+ * ganymede is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ganymede is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ganymede. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#header {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#ganymede{
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 119px;
+  border-bottom-right-radius: 48px;
+  background-color: #777;
+}
+
+#ganymede-logo{
+  z-index: 2000;
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  bottom: -1px;
+  right: -1px
+}
+
+#menubar {
+  background: transparent;
+  display: inline-block;
+  width: unset;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+#menubar.vertical {
+  bottom: 16px;
+  right: 48px;
+}
+
+#menubar.horizontal {
+  display: block;
+  bottom: 48px;
+  right: 0;
+}
+
+#menus {
+  background: transparent;
+  border: none;
+}
+
+#menubar.vertical li.dropdown {
+  float: none;
+}
+
+#menubar li.dropdown a {
+  color: #333;
+}
+
+#maintoolbar {
+  display: inline-block;
+  position: absolute;
+  width: unset;
+  padding: 0;
+  margin: 0;
+}
+
+#maintoolbar.vertical {
+  right: 0;
+  bottom: 48px;
+}
+
+#maintoolbar.horizontal {
+  display: block;
+  right: 48px;
+  bottom: 0;
+}
+
+#maintoolbar .toolbar-inner {
+  display: inline-block;
+  width: unset;
+  padding: 0;
+  margin: 0;
+}
+
+#maintoolbar-container {
+  display: inline-block;
+  width: unset;
+  padding: 0;
+  margin: 0;
+}
+
+#maintoolbar .btn-group,
+#maintoolbar .btn {
+  display: table;
+  float: none;
+  margin: 3px;
+  padding: 3px;
+}
+
+#maintoolbar.horizontal .btn-group {
+  display: inline-block;
+}
+
+#maintoolbar.horizontal .btn {
+  display: inline;
+}
+
+#maintoolbar .btn {
+  background-color: transparent;
+  border: 2px solid #333;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+#maintoolbar .btn:hover {
+  background-color: #333;
+  color: white;
+}
+
+#maintoolbar select,
+#maintoolbar .navbar-text {
+  display: none;
+}
+
+#ipython-main-app {
+  box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
+}
+
+#ganymede-console-tabs {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#ganymede-console-tabs li {
+  list-style: none;
+  float: left;
+}
+
+#kernel_indicator {
+  border: none;
+}
+
+#kernel_logo_widget {
+  float: left !important;
+}
+
+#notebook_name {
+  font-size: 150%;
+}
+
+#notification_area {
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+}
+
+#notebook_panel {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.ganymede-console-handle {
+  position: absolute;
+  bottom: -20px;
+  height: 20px;
+  padding: 0;
+  box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
+}
+
+#ganymede-console-handle-sw {
+  left: -1px;
+  width: 20%;
+  border-bottom-left-radius: 5px;
+  padding-left: 10px;
+  text-align: left;
+}
+
+#ganymede-console-handle-s {
+  left: 20%;
+  width: 60%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+}
+
+#ganymede-console-handle-s:hover {
+  background-color: #e6e6e6;
+}
+
+#ganymede-console-handle-se {
+  right: -1px;
+  width: 20%;
+  border-bottom-right-radius: 5px;
+  padding-right: 10px;
+  text-align: right;
+}
+
+.container {
+  width: unset;
+}
+
+#notebook {
+  padding-top: 0;
+  margin-top: 40px;
+}
+
+#notebook .out_prompt_overlay {
+  /* font-size: 14px; */
+}
+
+.output_wrapper.ganymede {
+  position: fixed;
+  z-index: 200;
+  border: thin solid #ababab;
+  border-radius: 2px;
+}
