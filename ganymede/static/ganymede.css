@@ -152,7 +152,7 @@
   border-top: none;
   border-radius: 0;
   position: absolute;
-  padding-top: 0;
+  padding-top: 48px;
   box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
 }
 
@@ -165,6 +165,10 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+#ipython-main-app.collapsed {
+  padding-top: 0;
 }
 
 #ipython-main-app.collapsed #ganymede-console-tabs {

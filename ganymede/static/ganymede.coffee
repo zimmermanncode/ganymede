@@ -126,7 +126,7 @@ class Ganymede
                     if not $_console.hasClass 'collapsed'
                         window.ganymede.consoleHeight \
                           = $_console.outerHeight()
-                        $_console.height 0
+                        $_console.outerHeight 0
                         $_console.addClass 'collapsed'
                     $_ = $(@)
                     $_.addClass 'ganymede'
@@ -140,7 +140,7 @@ class Ganymede
                     $_.css 'z-index', z + index
                 stop: ->
                     $_console = window.ganymede.$_console
-                    $_console.height window.ganymede.consoleHeight
+                    $_console.outerHeight window.ganymede.consoleHeight
                     $_console.removeClass 'collapsed'
 
     update: ->
