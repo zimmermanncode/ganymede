@@ -101,7 +101,7 @@ class Ganymede
                 @consoleHeight = @$_console.outerHeight()
                 @$_console.height 0
             else
-                @$_console.height @consoleHeight
+                @$_console.outerHeight @consoleHeight
 
         @preventConsoleToggle = false
 
