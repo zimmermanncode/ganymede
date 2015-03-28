@@ -191,6 +191,14 @@
   font-size: 150%;
 }
 
+#save_widget {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  border: thin #777 solid;
+  background: #e7e7e7;
+}
+
 #notification_area {
   position: absolute;
   bottom: 0;
