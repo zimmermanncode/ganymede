@@ -32,6 +32,7 @@ class Ganymede
         @$_logo[0].src = "#{logo_src}"
         @$_logo.addClass('ui-resizable-handle ui-resizable-se')
 
+        $('#header').hide()
         @$_.append @$_menubar = $('#menubar')
         @$_.append @$_toolbar = $('#maintoolbar')
 
@@ -64,6 +65,7 @@ class Ganymede
         @update()
 
         @$_console = $('#ipython-main-app')
+        @$_console.append @$_checkpoint = $('#save_widget')
         @$_console.append @$_notifier = $('#notification_area')
         @$_console.handles = handles = {}
         for handle in ['sw', 's', 'se']
