@@ -196,6 +196,7 @@
 }
 
 #save_widget {
+  z-index: 10;
   position: absolute;
   bottom: 2px;
   left: 2px;
