@@ -115,7 +115,7 @@ class Ganymede
         $_.prepend $('#notebook_name')
         $_.prepend $('#kernel_logo_widget')
         @$_tabs.empty().append $_tab
-        @$_console.append @$_tabs
+        @$_console.prepend @$_tabs
         @$_console.tabs()
 
         $('#notebook-container').resize ->
