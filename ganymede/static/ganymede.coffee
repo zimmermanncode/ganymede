@@ -129,6 +129,7 @@ class Ganymede
 
         @console.revert()
         @$.remove()
+        @
 
 
 class Ganymede.Logo
@@ -236,3 +237,4 @@ class Ganymede.Console
             top: ''
             width: ''
             height: ''
+        @
