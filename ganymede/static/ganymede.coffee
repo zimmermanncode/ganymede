@@ -226,13 +226,10 @@ class Ganymede.Console
         for loc, $handle of @$handles
             $handle.remove()
 
-        $('#notebook').removeClass """ui-tabs-panel
-            ui-widget-content ui-corner-bottom
-            """
-        @$.removeClass """ui-resizable ui-tabs
-            ui-widget ui-widget-content ui-corner-all
-            """
+        @$.tabs 'destroy'
+        @$.resizable 'destroy'
         @$.css
+            position: ''
             left: ''
             top: ''
             width: ''
