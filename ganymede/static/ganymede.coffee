@@ -20,66 +20,137 @@
 
 class Ganymede
     constructor: (logo_src) ->
-        @$_ = $('#ganymede')
-        if not @$_.length
-            @$_ = $('<div id="ganymede"></div>')
-        $('body').append @$_
-
-        @$_logo = $('#ganymede-logo')
-        if not @$_logo.length
-            @$_logo = $('<img id="ganymede-logo" />')
-        @$_.append @$_logo
-        @$_logo[0].src = "#{logo_src}"
-        @$_logo.addClass('ui-resizable-handle ui-resizable-se')
-
         $('#header').hide()
-        @$_.append @$_menubar = $('#menubar')
-        @$_.append @$_toolbar = $('#maintoolbar')
+        @menubar = new Ganymede.MenuBar()
+        @toolbar = new Ganymede.ToolBar()
 
-        @$_.resizable
+        $('#ganymede').remove()
+        @$ = $("""<div id="ganymede"></div>""")
+        $('body').append @$
+
+        @$.append @menubar.$
+        @$.append @toolbar.$
+
+        @logo = new Ganymede.Logo logo_src
+        @$.append @logo.$
+        @logo.$.addClass('ui-resizable-handle ui-resizable-se')
+
+        @$.resizable
             handles:
-                se: @$_logo
+                se: @logo.$
             resize: =>
-                @preventToggle = true
+                @preventClick = true
                 @update()
 
-        @$_logo.off 'click'
-        @$_logo.click =>
-            if @preventToggle
-                @preventToggle = false
+        @logo.$.click =>
+            if @preventClick
+                @preventClick = false
                 return
+
             if @vertical
-                @$_.css
-                    width: if @$_.outerWidth() != @width
+                @$.css
+                    width: if @$.outerWidth() != @width
                         @width
                     else
-                        @$_logo.outerWidth true
+                        @logo.$.outerWidth true
             else
-                @$_.css
-                    height: if @$_.outerHeight() != @height
+                @$.css
+                    height: if @$.outerHeight() != @height
                         @height
                     else
-                        @$_logo.outerHeight true
+                        @logo.$.outerHeight true
 
-        @preventToggle = false
+        @preventClick = false
         @update()
 
-        @$_console = $('#ipython-main-app')
-        @$_console.append @$_checkpoint = $('#save_widget')
-        @$_console.append @$_notifier = $('#notification_area')
-        @$_console.handles = handles = {}
-        for handle in ['sw', 's', 'se']
-            id = "ganymede-console-handle-#{handle}"
-            $_ = $('#' + id)
-            if not $_.length
-                $_ = $("""<div id="#{id}">. . .</div>""")
-            $_.addClass """ganymede-console-handle btn btn-default
-                ui-resizable-handle ui-resizable-#{handle}
-                """
-            @$_console.append handles[handle] = $_
+        @console = new Ganymede.Console()
 
-        @$_console.resizable
-            handles: handles
+        $('#notebook-container').resize ->
+            $('.output_wrapper', @).draggable
+                handle: '.out_prompt_overlay'
+                start: ->
+                    $console = window.ganymede.console.$
+                    if not $console.hasClass 'collapsed'
+                        window.ganymede.consoleHeight \
+                          = $console.outerHeight()
+                        $console.outerHeight 0
+                        $console.addClass 'collapsed'
+                    $output = $(@)
+                    $output.addClass 'ganymede'
+                    $output.css 'z-index', -1
+                    $outputs = $('.output_wrapper.ganymede').sort (l, r) ->
+                        ($(l).css 'z-index') - ($(r).css 'z-index')
+                    z = -2 - $outputs.length
+                    $('body').css 'z-index', z - 1
+                    for output, index in $outputs
+                        $(output).css 'z-index', z + index
+                    $output.css 'z-index', z + index
+                stop: ->
+                    $console = window.ganymede.console.$
+                    $console.outerHeight window.ganymede.consoleHeight
+                    $console.removeClass 'collapsed'
+
+    update: ->
+        @width = @$.outerWidth()
+        @height = @$.outerHeight()
+        @horizontal = not (@vertical = @$.outerHeight() > @$.outerWidth())
+
+        for $bar in [@menubar.$, @toolbar.$]
+            $bar.toggleClass 'vertical', @vertical
+            $bar.toggleClass 'horizontal', @horizontal
+
+        $toolGroups = $('.btn-group', @toolbar.$)
+        if @horizontal
+            groupWidths = for group in $toolGroups
+                $buttons = $('.btn', group)
+                width = 6 + $buttons.length * ($buttons.outerWidth true)
+                $(group).css
+                    width: width
+                $(group).outerWidth true
+            @toolbar.$.css
+                width: groupWidths.reduce (l, r) -> l + r
+        else
+            $toolGroups.css
+                width: ''
+            @toolbar.$.css
+                width: ''
+        @
+
+
+class Ganymede.Logo
+    constructor: (src) ->
+        $('#ganymede-logo').remove()
+        @$ = $("""<img id="ganymede-logo" src="#{src}" />""")
+
+
+class Ganymede.MenuBar
+    constructor: ->
+        @$ = $('#menubar').detach()
+
+
+class Ganymede.ToolBar
+    constructor: ->
+        @$ = $('#maintoolbar').detach()
+
+
+class Ganymede.Console
+    constructor: ->
+        @$ = $('#ipython-main-app')
+        @$.append @$checkpoint = $('#save_widget')
+        @$.append @$notifier = $('#notification_area')
+
+        @$handles = {}
+        for loc in ['sw', 's', 'se']
+            id = "ganymede-console-handle-#{loc}"
+            $('#' + id).remove()
+            $handle = $("""<div id="#{id}">. . .</div>""").addClass """
+                ganymede-console-handle btn btn-default
+                ui-resizable-handle ui-resizable-#{loc}
+                """
+            @$.append @$handles[loc] = $handle
+
+        @$.resizable
+            handles: @$handles
             start: (event) ->
                 @mouseX = event.pageX
                 @offsetX = $(@).offset().left
@@ -88,81 +159,37 @@ class Ganymede
                     $(@).css
                         left: @offsetX + event.pageX - @mouseX
             stop: =>
-                @preventConsoleToggle = true
+                @preventClick = true
 
-        handle = @$_console.handles.s
-        handle.off 'click'
-        handle.click =>
-            if @preventConsoleToggle
-                @preventConsoleToggle = false
+        $handle = @$handles.s
+        $handle.click =>
+            if @preventClick
+                @preventClick = false
                 return
-            @$_console.toggleClass 'collapsed'
-            if @$_console.hasClass 'collapsed'
-                @consoleHeight = @$_console.outerHeight()
-                @$_console.height 0
+
+            @$.toggleClass 'collapsed'
+            if @$.hasClass 'collapsed'
+                @height = @$.outerHeight()
+                @$.height 0
             else
-                @$_console.outerHeight @consoleHeight
+                @$.outerHeight @consoleHeight
 
-        @preventConsoleToggle = false
+        @preventClick = false
 
-        @$_tabs = $('#ganymede-console-tabs')
-        if not @$_tabs.length
-            @$_tabs = $('<ul id="ganymede-console-tabs"></ul>')
-        $_tab = $('<li><a href="#notebook"></a></li>')
-        $_ = $('#kernel_indicator')
-        $('a', $_tab).append $_
-        $('.kernel_indicator_name', $_).hide()
-        $_.prepend $('#notebook_name')
-        $_.prepend $('#kernel_logo_widget')
-        @$_tabs.empty().append $_tab
-        @$_console.prepend @$_tabs
-        @$_console.tabs()
-
-        $('#notebook-container').resize ->
-            $('.output_wrapper', @).draggable
-                handle: '.out_prompt_overlay'
-                start: ->
-                    $_console = window.ganymede.$_console
-                    if not $_console.hasClass 'collapsed'
-                        window.ganymede.consoleHeight \
-                          = $_console.outerHeight()
-                        $_console.outerHeight 0
-                        $_console.addClass 'collapsed'
-                    $_ = $(@)
-                    $_.addClass 'ganymede'
-                    $_.css 'z-index', -1
-                    $_outputs = $('.output_wrapper.ganymede').sort (l, r) ->
-                        ($(l).css 'z-index') - ($(r).css 'z-index')
-                    z = -2 - $_outputs.length
-                    $('body').css 'z-index', z - 1
-                    for output, index in $_outputs
-                        $(output).css 'z-index', z + index
-                    $_.css 'z-index', z + index
-                stop: ->
-                    $_console = window.ganymede.$_console
-                    $_console.outerHeight window.ganymede.consoleHeight
-                    $_console.removeClass 'collapsed'
-
-    update: ->
-        @width = @$_.outerWidth()
-        @height = @$_.outerHeight()
-        @horizontal = not (@vertical = @$_.outerHeight() > @$_.outerWidth())
-        for $_ in [@$_menubar, @$_toolbar]
-            $_.toggleClass 'vertical', @vertical
-            $_.toggleClass 'horizontal', @horizontal
-        $_groups = $('.btn-group', @$_toolbar)
-        if @horizontal
-            group_widths = for group in $_groups
-                $_buttons = $('.btn', group)
-                width = 6 + $_buttons.length * ($_buttons.outerWidth true)
-                $(group).css
-                    width: width
-                $(group).outerWidth true
-            @$_toolbar.css
-                width: group_widths.reduce (l, r) -> l + r
-        else
-            $_groups.css
-                width: ''
-            @$_toolbar.css
-                width: ''
-        @
+        $tab = $('.ganymede-console-tab').detach()
+        $('#ganymede-console-tabs').remove()
+        @$tabs = $("""<ul id="ganymede-console-tabs"></ul>""")
+        if not $tab.length
+            $tab = $("""
+                <li class="ganymede-console-tab">
+                    <a href="#notebook"></a>
+                </li>
+                """)
+            $indicator = $('#kernel_indicator')
+            $('a', $tab).append $indicator
+            $('.kernel_indicator_name', $indicator).hide()
+            $indicator.prepend $('#notebook_name')
+            $indicator.prepend $('#kernel_logo_widget')
+        @$tabs.append $tab
+        @$.prepend @$tabs
+        @$.tabs()
