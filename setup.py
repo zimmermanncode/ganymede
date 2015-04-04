@@ -5,9 +5,14 @@ from setuptools import setup
 
 ROOT = os.path.dirname(os.path.realpath(__file__))
 
-# trigger ganymede.coffee-->js compilation
 sys.path.insert(0, ROOT)
-import ganymede.static
+
+
+if os.path.exists(os.path.join(
+  ROOT, 'ganymede', 'static', 'ganymede.coffee'
+  )):
+    # trigger ganymede.coffee-->.js compilation
+    import ganymede.static
 
 
 setup(
