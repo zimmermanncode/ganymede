@@ -38,10 +38,15 @@ def load():
     from IPython.display import HTML
 
     return HTML("""
-      <style type="text/css">%s</style>
+      <style id="ganymede-style" type="text/css">%s</style>
       <script type="text/javascript">
         %s
         window.ganymede = new Ganymede(%s);
+      </script>
+      <script type="text/javascript">
+        $('#ganymede-style').on('remove', function () {
+            window.ganymede.revert();
+        });
       </script>
       """ % (CSS.text(), JS.text(),
              json.dumps('data:image/svg+xml;base64,%s'

@@ -32,8 +32,8 @@ class Ganymede
         @$.append @toolbar.$
 
         @logo = new Ganymede.Logo logo_src
+        @logo.$.addClass 'ui-resizable-handle ui-resizable-se'
         @$.append @logo.$
-        @logo.$.addClass('ui-resizable-handle ui-resizable-se')
 
         @$.resizable
             handles:
@@ -116,6 +116,20 @@ class Ganymede
                 width: ''
         @
 
+    revert: ->
+        $origin = $('#menubar-container')
+        $origin.append @menubar.revert().$
+        $origin.append @toolbar.revert().$
+
+        $checkpoint = @console.$checkpoint.prepend $('#notebook_name')
+        $origin = $('#header-container')
+        $origin.append $checkpoint
+        $origin.append $('#kernel_logo_widget')
+        $('#header').show()
+
+        @console.revert()
+        @$.remove()
+
 
 class Ganymede.Logo
     constructor: (src) ->
@@ -127,10 +141,22 @@ class Ganymede.MenuBar
     constructor: ->
         @$ = $('#menubar').detach()
 
+    revert: ->
+        $('.container-fluid *:first', @$).after $('#kernel_indicator')
+        $('.kernel_indicator_name').show()
+        @
+
 
 class Ganymede.ToolBar
     constructor: ->
         @$ = $('#maintoolbar').detach()
+
+    revert: ->
+        $('.btn-group').css
+            width: ''
+        @$.css
+            width: ''
+        @
 
 
 class Ganymede.Console
@@ -193,3 +219,20 @@ class Ganymede.Console
         @$tabs.append $tab
         @$.prepend @$tabs
         @$.tabs()
+
+    revert: ->
+        @$tabs.remove()
+        for loc, $handle of @$handles
+            $handle.remove()
+
+        $('#notebook').removeClass """ui-tabs-panel
+            ui-widget-content ui-corner-bottom
+            """
+        @$.removeClass """ui-resizable ui-tabs
+            ui-widget ui-widget-content ui-corner-all
+            """
+        @$.css
+            left: ''
+            top: ''
+            width: ''
+            height: ''
