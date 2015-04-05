@@ -42,6 +42,7 @@ class Ganymede
                 @preventClick = true
                 @update()
 
+        @preventClick = false
         @logo.$.click =>
             if @preventClick
                 @preventClick = false
@@ -60,35 +61,8 @@ class Ganymede
                     else
                         @logo.$.outerHeight true
 
-        @preventClick = false
-        @update()
-
         @console = new Ganymede.Console()
-
-        $('#notebook-container').resize ->
-            $('.output_wrapper', @).draggable
-                handle: '.out_prompt_overlay'
-                start: ->
-                    $console = window.ganymede.console.$
-                    if not $console.hasClass 'collapsed'
-                        window.ganymede.consoleHeight \
-                          = $console.outerHeight()
-                        $console.outerHeight 0
-                        $console.addClass 'collapsed'
-                    $output = $(@)
-                    $output.addClass 'ganymede'
-                    $output.css 'z-index', -1
-                    $outputs = $('.output_wrapper.ganymede').sort (l, r) ->
-                        ($(l).css 'z-index') - ($(r).css 'z-index')
-                    z = -2 - $outputs.length
-                    $('body').css 'z-index', z - 1
-                    for output, index in $outputs
-                        $(output).css 'z-index', z + index
-                    $output.css 'z-index', z + index
-                stop: ->
-                    $console = window.ganymede.console.$
-                    $console.outerHeight window.ganymede.consoleHeight
-                    $console.removeClass 'collapsed'
+        @update()
 
     update: ->
         @width = @$.outerWidth()
@@ -102,8 +76,8 @@ class Ganymede
         $toolGroups = $('.btn-group', @toolbar.$)
         if @horizontal
             groupWidths = for group in $toolGroups
-                $buttons = $('.btn', group)
-                width = 6 + $buttons.length * ($buttons.outerWidth true)
+                $tools = $('.btn', group)
+                width = 6 + $tools.length * ($tools.outerWidth true)
                 $(group).css
                     width: width
                 $(group).outerWidth true
@@ -188,8 +162,8 @@ class Ganymede.Console
             stop: =>
                 @preventClick = true
 
-        $handle = @$handles.s
-        $handle.click =>
+        @preventClick = false
+        @$handles.s.click =>
             if @preventClick
                 @preventClick = false
                 return
@@ -200,8 +174,6 @@ class Ganymede.Console
                 @$.height 0
             else
                 @$.outerHeight @consoleHeight
-
-        @preventClick = false
 
         $tab = $('.ganymede-console-tab').detach()
         $('#ganymede-console-tabs').remove()
@@ -220,6 +192,35 @@ class Ganymede.Console
         @$tabs.append $tab
         @$.prepend @$tabs
         @$.tabs()
+
+        $('#notebook-container').resize =>
+            @update()
+
+        @update()
+
+    update: ->
+        $('.output_wrapper', @$).draggable
+            handle: '.out_prompt_overlay'
+            start: ->
+                $console = window.ganymede.console.$
+                if not $console.hasClass 'collapsed'
+                    window.ganymede.consoleHeight = $console.outerHeight()
+                    $console.outerHeight 0
+                    $console.addClass 'collapsed'
+                $output = $(@)
+                $output.addClass 'ganymede'
+                $output.css 'z-index', -1
+                $outputs = $('.output_wrapper.ganymede').sort (l, r) ->
+                    ($(l).css 'z-index') - ($(r).css 'z-index')
+                z = -2 - $outputs.length
+                $('body').css 'z-index', z - 1
+                for output, index in $outputs
+                    $(output).css 'z-index', z + index
+                $output.css 'z-index', z + index
+            stop: ->
+                $console = window.ganymede.console.$
+                $console.outerHeight window.ganymede.consoleHeight
+                $console.removeClass 'collapsed'
 
     revert: ->
         @$tabs.remove()
