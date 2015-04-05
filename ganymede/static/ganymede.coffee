@@ -35,11 +35,19 @@ class Ganymede
         @logo.$.addClass 'ui-resizable-handle ui-resizable-se'
         @$.append @logo.$
 
+        @height = @$.height()
+        @width = @$.width()
+
         @$.resizable
             handles:
                 se: @logo.$
+            start: =>
+                @height = @$.height()
+                @width = @$.width()
             resize: =>
                 @preventClick = true
+                @height = @$.height()
+                @width = @$.width()
                 @update()
 
         @preventClick = false
@@ -62,12 +70,21 @@ class Ganymede
                         @logo.$.outerHeight true
 
         @console = new Ganymede.Console()
+
+        $(window).on 'resize.ganymede', =>
+            @update()
         @update()
 
     update: ->
-        @width = @$.outerWidth()
-        @height = @$.outerHeight()
-        @horizontal = not (@vertical = @$.outerHeight() > @$.outerWidth())
+        overHeight = @height - @$.height() + (@$.outerHeight true) \
+            - $(window).height()
+        if overHeight > 0
+            @$.height @height - overHeight
+        overWidth = @width - @$.width() + (@$.outerWidth true) \
+            - $(window).width()
+        if overWidth > 0
+            @$.width @width - overWidth
+        @horizontal = not (@vertical = @$.height() > @$.width())
 
         for $bar in [@menubar.$, @toolbar.$]
             $bar.toggleClass 'vertical', @vertical
@@ -101,6 +118,7 @@ class Ganymede
         $origin.append $('#kernel_logo_widget')
         $('#header').show()
 
+        $(window).off 'resize.ganymede'
         @console.revert()
         @$.remove()
         @
@@ -150,15 +168,23 @@ class Ganymede.Console
                 """
             @$.append @$handles[loc] = $handle
 
+        @width = @$.width()
+        @height = @$.height()
+
         @$.resizable
             handles: @$handles
-            start: (event) ->
+            start: (event) =>
+                @height = @$.height()
+                @width = @$.width()
                 @mouseX = event.pageX
-                @offsetX = $(@).offset().left
-            resize: (event) ->
-                if $(@).data('ui-resizable').axis == 's'
-                    $(@).css
+                @offsetX = @$.offset().left
+            resize: (event) =>
+                @height = @$.height()
+                @width = @$.width()
+                if @$.data('ui-resizable').axis == 's'
+                    @$.css
                         left: @offsetX + event.pageX - @mouseX
+                @update()
             stop: =>
                 @preventClick = true
                 @update()
@@ -194,20 +220,24 @@ class Ganymede.Console
         @$.prepend @$tabs
         @$.tabs()
 
-        $([window, '#notebook-container']).on 'resize.ganymede', =>
+        $('#notebook-container').on 'resize.ganymede-console', =>
+            @updateOutputs()
+        $(window).on 'resize.ganymede-console', =>
             @update()
         @update()
 
     update: ->
-        overlap = (@$.outerHeight true) + (@$handles.s.outerHeight true) \
-            - $(window).height()
-        if overlap > 0
-            @$.height @$.height() - overlap
-        overlap = @$.offset().left + (@$.outerWidth true) \
-            - $(window).width()
-        if overlap > 0
-            @$.width @$.width() - overlap
+        overHeight = @height - @$.height() + (@$.outerHeight true) \
+            + (@$handles.s.outerHeight true) - $(window).height()
+        if overHeight > 0
+            @$.height @height - overHeight
+        overWidth = @width - @$.width() + (@$.outerWidth true) \
+            + @$.offset().left - $(window).width()
+        if overWidth > 0
+            @$.width @width - overWidth
+        @
 
+    updateOutputs: ->
         $('.output_wrapper', @$).draggable
             handle: '.out_prompt_overlay'
             start: (event) =>
@@ -228,6 +258,7 @@ class Ganymede.Console
             stop: =>
                 @$.height @height
                 @$.removeClass 'collapsed'
+        @
 
     revert: ->
         @$tabs.remove()
@@ -243,5 +274,5 @@ class Ganymede.Console
             width: ''
             height: ''
 
-        $([window, '#notebook-container']).off 'resize.ganymede'
+        $([window, '#notebook-container']).off 'resize.ganymede-console'
         @
