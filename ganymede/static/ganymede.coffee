@@ -210,13 +210,12 @@ class Ganymede.Console
 
         $('.output_wrapper', @$).draggable
             handle: '.out_prompt_overlay'
-            start: ->
-                $console = window.ganymede.console.$
-                if not $console.hasClass 'collapsed'
-                    window.ganymede.consoleHeight = $console.outerHeight()
-                    $console.outerHeight 0
-                    $console.addClass 'collapsed'
-                $output = $(@)
+            start: (event) =>
+                $output = $(event.target)
+                if not @$.hasClass 'collapsed'
+                    @height = @$.outerHeight()
+                    @$.outerHeight 0
+                    @$.addClass 'collapsed'
                 $output.addClass 'ganymede'
                 $output.css 'z-index', -1
                 $outputs = $('.output_wrapper.ganymede').sort (l, r) ->
@@ -226,10 +225,9 @@ class Ganymede.Console
                 for output, index in $outputs
                     $(output).css 'z-index', z + index
                 $output.css 'z-index', z + index
-            stop: ->
-                $console = window.ganymede.console.$
-                $console.outerHeight window.ganymede.consoleHeight
-                $console.removeClass 'collapsed'
+            stop: =>
+                @$.height @height
+                @$.removeClass 'collapsed'
 
     revert: ->
         @$tabs.remove()
