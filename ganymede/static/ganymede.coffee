@@ -57,17 +57,15 @@ class Ganymede
                 return
 
             if @vertical
-                @$.css
-                    width: if @$.outerWidth() != @width
-                        @width
-                    else
-                        @logo.$.outerWidth true
+                @$.width if @$.width() != @width
+                    @width
+                else
+                    @logo.$.outerWidth true
             else
-                @$.css
-                    height: if @$.outerHeight() != @height
-                        @height
-                    else
-                        @logo.$.outerHeight true
+                @$.height if @$.height() != @height
+                    @height
+                else
+                    @logo.$.outerHeight true
 
         @console = new Ganymede.Console()
 
@@ -197,10 +195,9 @@ class Ganymede.Console
 
             @$.toggleClass 'collapsed'
             if @$.hasClass 'collapsed'
-                @height = @$.outerHeight()
                 @$.height 0
             else
-                @$.outerHeight @consoleHeight
+                @update()
 
         $tab = $('.ganymede-console-tab').detach()
         $('#ganymede-console-tabs').remove()
