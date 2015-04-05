@@ -161,6 +161,7 @@ class Ganymede.Console
                         left: @offsetX + event.pageX - @mouseX
             stop: =>
                 @preventClick = true
+                @update()
 
         @preventClick = false
         @$handles.s.click =>
@@ -193,12 +194,20 @@ class Ganymede.Console
         @$.prepend @$tabs
         @$.tabs()
 
-        $('#notebook-container').resize =>
+        $([window, '#notebook-container']).on 'resize.ganymede', =>
             @update()
-
         @update()
 
     update: ->
+        overlap = (@$.outerHeight true) + (@$handles.s.outerHeight true) \
+            - $(window).height()
+        if overlap > 0
+            @$.height @$.height() - overlap
+        overlap = @$.offset().left + (@$.outerWidth true) \
+            - $(window).width()
+        if overlap > 0
+            @$.width @$.width() - overlap
+
         $('.output_wrapper', @$).draggable
             handle: '.out_prompt_overlay'
             start: ->
@@ -235,4 +244,6 @@ class Ganymede.Console
             top: ''
             width: ''
             height: ''
+
+        $([window, '#notebook-container']).off 'resize.ganymede'
         @
