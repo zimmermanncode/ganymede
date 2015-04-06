@@ -42,12 +42,17 @@ class Ganymede
             handles:
                 se: @logo.$
             start: =>
+                @preventClick = false
                 @height = @$.height()
                 @width = @$.width()
             resize: =>
+                @resizing = true
                 @preventClick = true
                 @height = @$.height()
                 @width = @$.width()
+                @update()
+            stop: =>
+                @resizing = false
                 @update()
 
         @preventClick = false
@@ -78,10 +83,14 @@ class Ganymede
             - $(window).height()
         if overHeight > 0
             @$.height @height - overHeight
+        else if not @resizing
+            @$.height @height
         overWidth = @width - @$.width() + (@$.outerWidth true) \
             - $(window).width()
         if overWidth > 0
             @$.width @width - overWidth
+        else if not @resizing
+            @$.width @width
         @horizontal = not (@vertical = @$.height() > @$.width())
 
         for $bar in [@menubar.$, @toolbar.$]
@@ -172,19 +181,22 @@ class Ganymede.Console
         @$.resizable
             handles: @$handles
             start: (event) =>
+                @preventClick = false
                 @height = @$.height()
                 @width = @$.width()
                 @mouseX = event.pageX
                 @offsetX = @$.offset().left
             resize: (event) =>
+                @resizing = true
                 @height = @$.height()
                 @width = @$.width()
                 if @$.data('ui-resizable').axis == 's'
+                    @preventClick = true
                     @$.css
                         left: @offsetX + event.pageX - @mouseX
                 @update()
             stop: =>
-                @preventClick = true
+                @resizing = false
                 @update()
 
         @preventClick = false
@@ -195,7 +207,9 @@ class Ganymede.Console
 
             @$.toggleClass 'collapsed'
             if @$.hasClass 'collapsed'
-                @$.height 0
+                @$.css
+                    top: 0
+                    height: 0
             else
                 @update()
 
@@ -224,14 +238,20 @@ class Ganymede.Console
         @update()
 
     update: ->
+        @$.css
+            top: top = @$tabs.outerHeight true
         overHeight = @height - @$.height() + (@$.outerHeight true) \
-            + (@$handles.s.outerHeight true) - $(window).height()
+            + top + (@$handles.s.outerHeight true) - $(window).height()
         if overHeight > 0
             @$.height @height - overHeight
+        else if not @resizing
+            @$.height @height
         overWidth = @width - @$.width() + (@$.outerWidth true) \
             + @$.offset().left - $(window).width()
         if overWidth > 0
             @$.width @width - overWidth
+        else if not @resizing
+            @$.width @width
         @
 
     updateOutputs: ->
