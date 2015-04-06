@@ -142,7 +142,8 @@ class Ganymede.MenuBar
         @$ = $('#menubar').detach()
 
     unload: ->
-        $('.container-fluid *:first', @$).after $('#kernel_indicator')
+        $('.container-fluid > *:first', @$).after $('#kernel_indicator')
+        $('.container-fluid > *:last', @$).before $('#notification_area')
         $('.kernel_indicator_name').show()
         @
 
