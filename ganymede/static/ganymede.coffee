@@ -105,10 +105,10 @@ class Ganymede
                 width: ''
         @
 
-    revert: ->
+    unload: ->
         $origin = $('#menubar-container')
-        $origin.append @menubar.revert().$
-        $origin.append @toolbar.revert().$
+        $origin.append @menubar.unload().$
+        $origin.append @toolbar.unload().$
 
         $checkpoint = @console.$checkpoint.prepend $('#notebook_name')
         $origin = $('#header-container')
@@ -117,7 +117,7 @@ class Ganymede
         $('#header').show()
 
         $(window).off 'resize.ganymede'
-        @console.revert()
+        @console.unload()
         @$.remove()
         @
 
@@ -132,7 +132,7 @@ class Ganymede.MenuBar
     constructor: ->
         @$ = $('#menubar').detach()
 
-    revert: ->
+    unload: ->
         $('.container-fluid *:first', @$).after $('#kernel_indicator')
         $('.kernel_indicator_name').show()
         @
@@ -142,7 +142,7 @@ class Ganymede.ToolBar
     constructor: ->
         @$ = $('#maintoolbar').detach()
 
-    revert: ->
+    unload: ->
         $('.btn-group').css
             width: ''
         @$.css
@@ -257,7 +257,14 @@ class Ganymede.Console
                 @$.removeClass 'collapsed'
         @
 
-    revert: ->
+    unload: ->
+        $outputs = $('.output_wrapper', @$).removeClass 'ganymede'
+        $outputs.css
+            'z-index': ''
+            position: ''
+            top: ''
+            left: ''
+
         @$tabs.remove()
         for loc, $handle of @$handles
             $handle.remove()

@@ -45,7 +45,7 @@ def load():
       </script>
       <script type="text/javascript">
         $('#ganymede-style').on('remove', function () {
-            window.ganymede.revert();
+            window.ganymede.unload();
         });
       </script>
       """ % (CSS.text(), JS.text(),
