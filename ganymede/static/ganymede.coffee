@@ -20,6 +20,11 @@
 
 class Ganymede
     constructor: (logo_src) ->
+        metadata = window.IPython.notebook.metadata
+        if not metadata.ganymede?
+            metadata.ganymede = {}
+        @metadata = metadata.ganymede
+
         $('#header').hide()
         @menubar = new Ganymede.MenuBar()
         @toolbar = new Ganymede.ToolBar()
@@ -35,21 +40,25 @@ class Ganymede
         @logo.$.addClass 'ui-resizable-handle ui-resizable-se'
         @$.append @logo.$
 
-        @height = @$.height()
-        @width = @$.width()
+        if not @metadata.height?
+            @metadata.height = @logo.$.outerHeight true
+        if not @metadata.width?
+            @metadata.width = @logo.$.outerWidth true
+        @$.height @metadata.height
+        @$.width @metadata.width
 
         @$.resizable
             handles:
                 se: @logo.$
             start: =>
                 @preventClick = false
-                @height = @$.height()
-                @width = @$.width()
+                @metadata.height = @$.height()
+                @metadata.width = @$.width()
             resize: =>
                 @resizing = true
                 @preventClick = true
-                @height = @$.height()
-                @width = @$.width()
+                @metadata.height = @$.height()
+                @metadata.width = @$.width()
                 @update()
             stop: =>
                 @resizing = false
@@ -62,13 +71,13 @@ class Ganymede
                 return
 
             if @vertical
-                @$.width if @$.width() != @width
-                    @width
+                @$.width if @$.width() != @metadata.width
+                    @metadata.width
                 else
                     @logo.$.outerWidth true
             else
-                @$.height if @$.height() != @height
-                    @height
+                @$.height if @$.height() != @metadata.height
+                    @metadata.height
                 else
                     @logo.$.outerHeight true
 
@@ -79,16 +88,16 @@ class Ganymede
         @update()
 
     update: ->
-        overHeight = @height - @$.height() + (@$.outerHeight true) \
+        overHeight = @metadata.height - @$.height() + (@$.outerHeight true) \
             - $(window).height()
         if overHeight > 0
-            @$.height @height - overHeight
+            @$.height @metadata.height - overHeight
         else if not @resizing
             @$.height @height
-        overWidth = @width - @$.width() + (@$.outerWidth true) \
+        overWidth = @metadata.width - @$.width() + (@$.outerWidth true) \
             - $(window).width()
         if overWidth > 0
-            @$.width @width - overWidth
+            @$.width @metadata.width - overWidth
         else if not @resizing
             @$.width @width
         @horizontal = not (@vertical = @$.height() > @$.width())
@@ -162,6 +171,11 @@ class Ganymede.ToolBar
 
 class Ganymede.Console
     constructor: ->
+        metadata = window.IPython.notebook.metadata.ganymede
+        if not metadata.console?
+            metadata.console = {}
+        @metadata = metadata.console
+
         @$ = $('#ipython-main-app')
         @$.append @$checkpoint = $('#save_widget')
         @$.append @$notifier = $('#notification_area')
@@ -176,25 +190,34 @@ class Ganymede.Console
                 """
             @$.append @$handles[loc] = $handle
 
-        @width = @$.width()
-        @height = @$.height()
+        if not @metadata.width?
+            @metadata.width = @$.width()
+        if not @metadata.height?
+            @metadata.height = @$.height()
+
+        if @metadata.left?
+            @$.css
+                left: @metadata.left
+        else
+            @metadata.left = @$.offset().left
 
         @$.resizable
             handles: @$handles
             start: (event) =>
                 @preventClick = false
-                @height = @$.height()
-                @width = @$.width()
+                @metadata.height = @$.height()
+                @metadata.width = @$.width()
                 @mouseX = event.pageX
                 @offsetX = @$.offset().left
             resize: (event) =>
                 @resizing = true
-                @height = @$.height()
-                @width = @$.width()
+                @metadata.height = @$.height()
+                @metadata.width = @$.width()
                 if @$.data('ui-resizable').axis == 's'
                     @preventClick = true
                     @$.css
-                        left: @offsetX + event.pageX - @mouseX
+                        left: @metadata.left \
+                            = @offsetX + event.pageX - @mouseX
                 @update()
             stop: =>
                 @resizing = false
@@ -241,18 +264,18 @@ class Ganymede.Console
     update: ->
         @$.css
             top: top = @$tabs.outerHeight true
-        overHeight = @height - @$.height() + (@$.outerHeight true) \
+        overHeight = @metadata.height - @$.height() + (@$.outerHeight true) \
             + top + (@$handles.s.outerHeight true) - $(window).height()
         if overHeight > 0
-            @$.height @height - overHeight
+            @$.height @metadata.height - overHeight
         else if not @resizing
-            @$.height @height
-        overWidth = @width - @$.width() + (@$.outerWidth true) \
+            @$.height @metadata.height
+        overWidth = @metadata.width - @$.width() + (@$.outerWidth true) \
             + @$.offset().left - $(window).width()
         if overWidth > 0
-            @$.width @width - overWidth
+            @$.width @metadata.width - overWidth
         else if not @resizing
-            @$.width @width
+            @$.width @metadata.width
         @
 
     updateOutputs: ->
@@ -261,7 +284,6 @@ class Ganymede.Console
             start: (event) =>
                 $output = $(event.target)
                 if not @$.hasClass 'collapsed'
-                    @height = @$.outerHeight()
                     @$.outerHeight 0
                     @$.addClass 'collapsed'
                 $output.addClass 'ganymede'
@@ -274,7 +296,7 @@ class Ganymede.Console
                     $(output).css 'z-index', z + index
                 $output.css 'z-index', z + index
             stop: =>
-                @$.height @height
+                @$.height @metadata.height
                 @$.removeClass 'collapsed'
         @
 
