@@ -284,8 +284,10 @@ class Ganymede.Console
             start: (event) =>
                 $output = $(event.target)
                 if not @$.hasClass 'collapsed'
-                    @$.outerHeight 0
                     @$.addClass 'collapsed'
+                    @$.css
+                        top: 0
+                        height: 0
                 $output.addClass 'ganymede'
                 $output.css 'z-index', -1
                 $outputs = $('.output_wrapper.ganymede').sort (l, r) ->
@@ -296,8 +298,8 @@ class Ganymede.Console
                     $(output).css 'z-index', z + index
                 $output.css 'z-index', z + index
             stop: =>
-                @$.height @metadata.height
                 @$.removeClass 'collapsed'
+                @update()
         @
 
     unload: ->
