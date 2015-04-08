@@ -289,7 +289,7 @@ class Ganymede.Console
             else
                 0
         $('body').css
-            'z-index': (Math.max zValues...) - 1
+            'z-index': (Math.min zValues...) - 1
 
         $('.output_wrapper', @$).draggable
             handle: '.out_prompt_overlay'
