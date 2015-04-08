@@ -20,10 +20,7 @@
 
 class Ganymede
     constructor: (logo_src) ->
-        metadata = window.IPython.notebook.metadata
-        if not metadata.ganymede?
-            metadata.ganymede = {}
-        @metadata = metadata.ganymede
+        @metadata = window.IPython.notebook.metadata.ganymede ?= {}
 
         $('#header').hide()
         @menubar = new Ganymede.MenuBar()
@@ -40,10 +37,8 @@ class Ganymede
         @logo.$.addClass 'ui-resizable-handle ui-resizable-se'
         @$.append @logo.$
 
-        if not @metadata.height?
-            @metadata.height = @logo.$.outerHeight true
-        if not @metadata.width?
-            @metadata.width = @logo.$.outerWidth true
+        @metadata.height ?= @logo.$.outerHeight true
+        @metadata.width ?= @logo.$.outerWidth true
         @$.height @metadata.height
         @$.width @metadata.width
 
@@ -171,10 +166,8 @@ class Ganymede.ToolBar
 
 class Ganymede.Console
     constructor: ->
-        metadata = window.IPython.notebook.metadata.ganymede
-        if not metadata.console?
-            metadata.console = {}
-        @metadata = metadata.console
+        @metadata = (window.IPython.notebook.metadata.ganymede ?= {}) \
+            .console ?= {}
 
         @$ = $('#ipython-main-app')
         @$.append @$checkpoint = $('#save_widget')
@@ -190,10 +183,8 @@ class Ganymede.Console
                 """
             @$.append @$handles[loc] = $handle
 
-        if not @metadata.width?
-            @metadata.width = @$.width()
-        if not @metadata.height?
-            @metadata.height = @$.height()
+        @metadata.width ?= @$.width()
+        @metadata.height ?= @$.height()
 
         if @metadata.left?
             @$.css
@@ -279,6 +270,23 @@ class Ganymede.Console
         @
 
     updateOutputs: ->
+        zValues = for cell in $('.cell', @$)
+            metadata = ($(cell).data('cell').metadata.ganymede ?= {}) \
+                .output ?= {}
+            if metadata.undocked is true
+                $output = $('.output_wrapper', cell)
+                $output.addClass 'ganymede'
+                $output.css
+                    position: 'fixed'
+                    'z-index': z = metadata['z-index'] or -1
+                    top: metadata.top or 0
+                    left: metadata.left or 0
+                z
+            else
+                0
+        $('body').css
+            'z-index': (Math.max zValues...) - 1
+
         $('.output_wrapper', @$).draggable
             handle: '.out_prompt_overlay'
             start: (event) =>
@@ -295,9 +303,23 @@ class Ganymede.Console
                 z = -2 - $outputs.length
                 $('body').css 'z-index', z - 1
                 for output, index in $outputs
-                    $(output).css 'z-index', z + index
-                $output.css 'z-index', z + index
-            stop: =>
+                    metadata = ($(output).parents('.cell')
+                        .data('cell').metadata.ganymede ?= {}
+                        ).output ?= {}
+                    $(output).css
+                        'z-index': metadata['z-index'] = z + index
+                metadata = ($output.parents('.cell')
+                    .data('cell').metadata.ganymede ?= {}
+                    ).output ?= {}
+                metadata.undocked = true
+                $output.css
+                    'z-index': metadata['z-index'] = z + index
+            stop: (event) =>
+                $output = $(event.target)
+                metadata = ($output.parents('.cell')
+                    .data('cell').metadata.ganymede ?= {}
+                    ).output ?= {}
+                $.extend metadata, $output.offset()
                 @$.removeClass 'collapsed'
                 @update()
         @
