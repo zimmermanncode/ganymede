@@ -185,12 +185,13 @@ class Ganymede.Console
 
         @metadata.width ?= @$.width()
         @metadata.height ?= @$.height()
-
         if @metadata.left?
             @$.css
                 left: @metadata.left
         else
             @metadata.left = @$.offset().left
+        if @metadata.collapsed is true
+            @$.addClass 'collapsed'
 
         @$.resizable
             handles: @$handles
@@ -221,12 +222,8 @@ class Ganymede.Console
                 return
 
             @$.toggleClass 'collapsed'
-            if @$.hasClass 'collapsed'
-                @$.css
-                    top: 0
-                    height: 0
-            else
-                @update()
+            @metadata.collapsed = @$.hasClass 'collapsed'
+            @update()
 
         $tab = $('.ganymede-console-tab').detach()
         $('#ganymede-console-tabs').remove()
@@ -253,6 +250,19 @@ class Ganymede.Console
         @update()
 
     update: ->
+        overWidth = @metadata.width - @$.width() + (@$.outerWidth true) \
+            + @$.offset().left - $(window).width()
+        if overWidth > 0
+            @$.width @metadata.width - overWidth
+        else if not @resizing
+            @$.width @metadata.width
+
+        if @$.hasClass 'collapsed'
+            @$.css
+                top: 0
+                height: 0
+            return @
+
         @$.css
             top: top = @$tabs.outerHeight true
         overHeight = @metadata.height - @$.height() + (@$.outerHeight true) \
@@ -261,12 +271,6 @@ class Ganymede.Console
             @$.height @metadata.height - overHeight
         else if not @resizing
             @$.height @metadata.height
-        overWidth = @metadata.width - @$.width() + (@$.outerWidth true) \
-            + @$.offset().left - $(window).width()
-        if overWidth > 0
-            @$.width @metadata.width - overWidth
-        else if not @resizing
-            @$.width @metadata.width
         @
 
     updateOutputs: ->
@@ -291,11 +295,8 @@ class Ganymede.Console
             handle: '.out_prompt_overlay'
             start: (event) =>
                 $output = $(event.target)
-                if not @$.hasClass 'collapsed'
-                    @$.addClass 'collapsed'
-                    @$.css
-                        top: 0
-                        height: 0
+                @$.addClass 'collapsed'
+                @update()
                 $output.addClass 'ganymede'
                 $output.css 'z-index', -1
                 $outputs = $('.output_wrapper.ganymede').sort (l, r) ->
