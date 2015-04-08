@@ -88,13 +88,13 @@ class Ganymede
         if overHeight > 0
             @$.height @metadata.height - overHeight
         else if not @resizing
-            @$.height @height
+            @$.height @metadata.height
         overWidth = @metadata.width - @$.width() + (@$.outerWidth true) \
             - $(window).width()
         if overWidth > 0
             @$.width @metadata.width - overWidth
         else if not @resizing
-            @$.width @width
+            @$.width @metadata.width
         @horizontal = not (@vertical = @$.height() > @$.width())
 
         for $bar in [@menubar.$, @toolbar.$]
