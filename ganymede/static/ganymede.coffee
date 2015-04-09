@@ -47,6 +47,7 @@ class Ganymede
                 se: @logo.$
             start: =>
                 @preventClick = false
+                @metadata.slim = false
                 @metadata.height = @$.height()
                 @metadata.width = @$.width()
             resize: =>
@@ -66,12 +67,14 @@ class Ganymede
                 return
 
             if @vertical
-                @$.width if @$.width() != @metadata.width
+                @metadata.slim = slim = @$.width() == @metadata.width
+                @$.width if not slim
                     @metadata.width
                 else
                     @logo.$.outerWidth true
             else
-                @$.height if @$.height() != @metadata.height
+                @metadata.slim = slim = @$.height() == @metadata.height
+                @$.height if not slim
                     @metadata.height
                 else
                     @logo.$.outerHeight true
@@ -80,6 +83,7 @@ class Ganymede
 
         $(window).on 'resize.ganymede', =>
             @update()
+
         @update()
 
     update: ->
@@ -96,6 +100,12 @@ class Ganymede
         else if not @resizing
             @$.width @metadata.width
         @horizontal = not (@vertical = @$.height() > @$.width())
+
+        if @metadata.slim is true
+            if @vertical
+                @$.width @logo.$.outerWidth true
+            else
+                @$.height @logo.$.outerHeight true
 
         for $bar in [@menubar.$, @toolbar.$]
             $bar.toggleClass 'vertical', @vertical
