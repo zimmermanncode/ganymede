@@ -167,10 +167,6 @@
   left: 0;
 }
 
-#ipython-main-app.collapsed {
-  top: 0;
-}
-
 #ipython-main-app.collapsed #ganymede-console-tabs {
   display: none;
 }
