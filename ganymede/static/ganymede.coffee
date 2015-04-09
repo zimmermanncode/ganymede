@@ -258,11 +258,14 @@ class Ganymede.Console
             @$.width @metadata.width
 
         if @$.hasClass 'collapsed'
+            @$.resizable 'disable'
+            @$.removeClass 'ui-state-disabled'
             @$.css
                 top: 0
                 height: 0
             return @
 
+        @$.resizable 'enable'
         @$.css
             top: top = @$tabs.outerHeight true
         overHeight = @metadata.height - @$.height() + (@$.outerHeight true) \
