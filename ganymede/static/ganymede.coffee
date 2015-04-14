@@ -269,7 +269,7 @@ class Ganymede.Console
 
         if @$.hasClass 'collapsed'
             @$.resizable 'disable'
-            @$.removeClass 'ui-state-disabled'
+            @$.removeClass 'ui-resizable-disabled ui-state-disabled'
             @$.css
                 top: 0
                 height: 0
