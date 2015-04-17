@@ -6,6 +6,8 @@ python:
   - pypy
 
 install:
+  - npm install coffee-script
+  - export PATH="$(npm bin):$PATH"
   - pip install -r requirements.txt
   - pip install -r requirements.dev.txt
   - pip install -e .
