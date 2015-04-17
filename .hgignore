@@ -1,15 +1,14 @@
 ~$
 \.pyc$
-
 \.diff$
+\.orig$
 
 \.env/
-
-ganymede/static/ganymede.js
-
 \.egg-info/
 ^dist/
-
 ^node_modules/
+^\.tox/
 
+ganymede/static/ganymede.js
 ^\.ipynb
+
