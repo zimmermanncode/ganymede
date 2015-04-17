@@ -10,6 +10,7 @@
 
 * https://bitbucket.org/userzimmermann/ganymede
 * https://github.com/userzimmermann/ganymede
+* https://www.openhub.net/p/jupyter-ganymede
 
 
 
