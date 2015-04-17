@@ -4,16 +4,16 @@
 
 
 
-![](https://travis-ci.org/userzimmermann/ganymede.svg)
-
-
-
-## Hacking Jupyter's atmosphere
+[![](https://travis-ci.org/userzimmermann/ganymede.svg)](https://travis-ci.org/userzimmermann/ganymede)
 
 
 
 * https://bitbucket.org/userzimmermann/ganymede
 * https://github.com/userzimmermann/ganymede
+
+
+
+## Hacking Jupyter's atmosphere
 
 
 
