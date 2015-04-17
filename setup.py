@@ -24,7 +24,7 @@ setup(
   author_email="<zimmermann.code@gmail.com>",
   url="https://bitbucket.org/userzimmermann/ganymede",
 
-  license='LGPLv3',
+  license='GPLv3',
 
   install_requires=open(os.path.join(ROOT, 'requirements.txt')).read(),
 
@@ -39,8 +39,7 @@ setup(
   classifiers=[
     'Development Status :: 3 - Alpha',
     'Intended Audience :: Developers',
-    'License :: OSI Approved'
-    ' :: GNU Library or Lesser General Public License (LGPL)',
+    'License :: OSI Approved :: GNU General Public License (GPL)',
     'Operating System :: OS Independent',
     'Topic :: Software Development',
     'Topic :: Utilities',
