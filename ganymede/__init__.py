@@ -21,7 +21,7 @@ import sys
 from base64 import b64encode
 import json
 
-__version__ = '0.1.dev'
+__version__ = '0.1.0'
 
 
 def load():
