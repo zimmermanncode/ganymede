@@ -1,7 +1,9 @@
 include COPYING
 
 include requirements.txt
+exclude requirements.dev.txt
 
+exclude *.ipynb
 exclude *.svg
 
 recursive-include ganymede/static *.svg *.css *.js
