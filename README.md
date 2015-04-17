@@ -43,6 +43,7 @@ Then open an IPython notebook in Jupyter's web interface and:
 
 
 ```python
+%load_ext ganymede
 ```
 
 
