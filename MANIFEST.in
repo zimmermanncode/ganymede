@@ -1,5 +1,9 @@
 include COPYING
 
+include README.rst
+include README.md
+include CHANGES.md
+
 include requirements.txt
 exclude requirements.dev.txt
 
