@@ -1,2 +1,2 @@
-path.py
-ipython[notebook] >= 3.0
+path.py >= 7.0
+ipython >= 3.0
