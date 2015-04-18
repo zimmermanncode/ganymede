@@ -6,6 +6,8 @@ install:
   - choco install miniconda3
   - conda create -n %PYTHON_VERSION% python=%PYTHON_VERSION%
   - activate %PYTHON_VERSION%
-  - python --version
 
-build: no
+build: false
+
+test_script:
+  - python --version
