@@ -1,3 +1,6 @@
+* Embedded jQuery UI Touch Punch
+* Made cell outputs keep their offset on undocking
+
 __0.1.0__
 
 * First beta release
