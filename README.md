@@ -4,13 +4,23 @@
 
 
 
-[![](https://travis-ci.org/userzimmermann/ganymede.svg)](https://travis-ci.org/userzimmermann/ganymede)
+![](http://linux.org/favicon.ico)
+[![](https://travis-ci.org/userzimmermann/ganymede.svg)](
+  https://travis-ci.org/userzimmermann/ganymede)
+![](http://windows.microsoft.com/favicon.ico)
+[![](https://ci.appveyor.com/api/projects/status/49sp18ovmcpp9tmg?svg=true)](
+  https://ci.appveyor.com/project/userzimmermann/ganymede)
 
 
 
-* https://bitbucket.org/userzimmermann/ganymede
-* https://github.com/userzimmermann/ganymede
-* https://www.openhub.net/p/jupyter-ganymede
+![](https://bitbucket.org/favicon.ico)
+https://bitbucket.org/userzimmermann/ganymede
+
+![](https://github.com/favicon.ico)
+https://github.com/userzimmermann/ganymede
+
+![](https://www.openhub.net/favicon.ico)
+https://www.openhub.net/p/jupyter-ganymede
 
 
 
