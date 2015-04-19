@@ -31,7 +31,7 @@ def load():
     # make sure that .static pkg gets reloaded on %reload_ext ganymede
     # to recompile ganymede.coffee in development (non-installed) mode
     sys.modules.pop('ganymede.static', None)
-    from ganymede.static import CSS, JS, SVG
+    from ganymede.static import CSS, JS, TOUCH_PUNCH_JS, SVG
 
     # import locally to make this module importable in setup.py
     # without further dependencies
@@ -41,6 +41,9 @@ def load():
       <style id="ganymede-style" type="text/css">%s</style>
       <script type="text/javascript">
         %s
+      </script>
+      <script type="text/javascript">
+        %s
         window.ganymede = new Ganymede(%s);
       </script>
       <script type="text/javascript">
@@ -48,9 +51,10 @@ def load():
             window.ganymede.unload();
         });
       </script>
-      """ % (CSS.text(), JS.text(),
+      """ % (CSS.text(), TOUCH_PUNCH_JS.text(), JS.text(),
              json.dumps('data:image/svg+xml;base64,%s'
-                        % b64encode(SVG.bytes()).decode('ascii'))))
+                        % b64encode(SVG.bytes()).decode('ascii')),
+             ))
 
 
 def load_ipython_extension(shell):
