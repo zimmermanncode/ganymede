@@ -100,6 +100,12 @@ re-evaluating the cell will also update the undocked output.
 
 
 
+Thanks to the embedded `jQuery UI Touch
+Punch <http://touchpunch.furf.com>`__, all that resizing and dragging
+also works via touch events.
+
+
+
 You can go back to the default Jupyter interface any time by deleting
 the ``%load_ext ganymede`` cell or just its output. You can also
 ``%reload_ext ganymede`` at any time. Size, positions and state of the

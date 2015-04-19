@@ -63,6 +63,10 @@ You might wonder what's the essential advantage of these features. It will make 
 
 
 
+Thanks to the embedded [jQuery UI Touch Punch](http://touchpunch.furf.com), all that resizing and dragging also works via touch events.
+
+
+
 You can go back to the default Jupyter interface any time by deleting the `%load_ext ganymede` cell or just its output. You can also `%reload_ext ganymede` at any time. Size, positions and state of the console, the menu area and the output cells are stored as notebook and cell metadata respectively.
 
 
