@@ -310,6 +310,13 @@ class Ganymede.Console
                 $output = $(event.target)
                 @$.addClass 'collapsed'
                 @update()
+                #HACK: keep current offset...
+                if not $output.hasClass 'ganymede'
+                    offset = $output.offset()
+                    data = $output.data('ui-draggable')
+                    data.offset.click.top -= offset.top
+                    data.offset.click.left -= offset.left
+                #... when switching to position: fixed
                 $output.addClass 'ganymede'
                 $output.css 'z-index', -1
                 $outputs = $('.output_wrapper.ganymede').sort (l, r) ->
