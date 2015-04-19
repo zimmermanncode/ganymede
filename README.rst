@@ -7,26 +7,18 @@
 
 
 
-|image0| |image1| |image2| |image3|
+|image0| |image1|
 
-.. |image0| image:: http://linux.org/favicon.ico
-.. |image1| image:: https://travis-ci.org/userzimmermann/ganymede.svg
+.. |image0| image:: https://travis-ci.org/userzimmermann/ganymede.svg
    :target: https://travis-ci.org/userzimmermann/ganymede
-.. |image2| image:: http://windows.microsoft.com/favicon.ico
-.. |image3| image:: https://ci.appveyor.com/api/projects/status/49sp18ovmcpp9tmg?svg=true
+.. |image1| image:: https://ci.appveyor.com/api/projects/status/49sp18ovmcpp9tmg?svg=true
    :target: https://ci.appveyor.com/project/userzimmermann/ganymede
 
 
 
-|image0| https://bitbucket.org/userzimmermann/ganymede
-
-|image1| https://github.com/userzimmermann/ganymede
-
-|image2| https://www.openhub.net/p/jupyter-ganymede
-
-.. |image0| image:: https://bitbucket.org/favicon.ico
-.. |image1| image:: https://github.com/favicon.ico
-.. |image2| image:: https://www.openhub.net/favicon.ico
+-  https://bitbucket.org/userzimmermann/ganymede
+-  https://github.com/userzimmermann/ganymede
+-  https://www.openhub.net/p/jupyter-ganymede
 
 
 
