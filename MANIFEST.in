@@ -7,6 +7,9 @@ include CHANGES.md
 include requirements.txt
 exclude requirements.dev.txt
 
+exclude .hg*
+exclude *.yml
+exclude *.ini
 exclude *.ipynb
 exclude *.svg
 
