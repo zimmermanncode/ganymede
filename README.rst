@@ -19,6 +19,7 @@
 -  https://bitbucket.org/userzimmermann/ganymede
 -  https://github.com/userzimmermann/ganymede
 -  https://www.openhub.net/p/jupyter-ganymede
+-  Includes `jQuery UI Touch Punch <http://touchpunch.furf.com>`__
 
 
 
@@ -100,9 +101,8 @@ re-evaluating the cell will also update the undocked output.
 
 
 
-Thanks to the embedded `jQuery UI Touch
-Punch <http://touchpunch.furf.com>`__, all that resizing and dragging
-also works via touch events.
+Thanks to the embedded jQuery UI Touch Punch, all that resizing and
+dragging also works via touch events.
 
 
 

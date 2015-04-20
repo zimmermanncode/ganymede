@@ -14,6 +14,7 @@
 * https://bitbucket.org/userzimmermann/ganymede
 * https://github.com/userzimmermann/ganymede
 * https://www.openhub.net/p/jupyter-ganymede
+* Includes [jQuery UI Touch Punch](http://touchpunch.furf.com)
 
 
 
@@ -63,7 +64,7 @@ You might wonder what's the essential advantage of these features. It will make 
 
 
 
-Thanks to the embedded [jQuery UI Touch Punch](http://touchpunch.furf.com), all that resizing and dragging also works via touch events.
+Thanks to the embedded jQuery UI Touch Punch, all that resizing and dragging also works via touch events.
 
 
 
