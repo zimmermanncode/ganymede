@@ -4,6 +4,8 @@
 
 
 
+[![](https://pypip.in/v/ganymede/badge.svg)](
+  https://pypi.python.org/pypi/ganymede)
 [![](https://travis-ci.org/userzimmermann/ganymede.svg)](
   https://travis-ci.org/userzimmermann/ganymede)
 [![](https://ci.appveyor.com/api/projects/status/49sp18ovmcpp9tmg?svg=true)](

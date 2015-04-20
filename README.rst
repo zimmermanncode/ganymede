@@ -7,11 +7,13 @@
 
 
 
-|image0| |image1|
+|image0| |image1| |image2|
 
-.. |image0| image:: https://travis-ci.org/userzimmermann/ganymede.svg
+.. |image0| image:: https://pypip.in/v/ganymede/badge.svg
+   :target: https://pypi.python.org/pypi/ganymede
+.. |image1| image:: https://travis-ci.org/userzimmermann/ganymede.svg
    :target: https://travis-ci.org/userzimmermann/ganymede
-.. |image1| image:: https://ci.appveyor.com/api/projects/status/49sp18ovmcpp9tmg?svg=true
+.. |image2| image:: https://ci.appveyor.com/api/projects/status/49sp18ovmcpp9tmg?svg=true
    :target: https://ci.appveyor.com/project/userzimmermann/ganymede
 
 
