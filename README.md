@@ -3,7 +3,7 @@
 # ![](https://bitbucket.org/userzimmermann/ganymede/raw/default/ganymede/static/ganymede.svg) Ganymede
 
 
-[![](http://www.gnu.org/graphics/gplv3-88x31.png)]()
+[![](http://www.gnu.org/graphics/gplv3-88x31.png)](http://www.gnu.org/licenses/gpl.html)
 [![](https://pypip.in/v/ganymede/badge.svg)](
   https://pypi.python.org/pypi/ganymede)
 [![](https://travis-ci.org/userzimmermann/ganymede.svg)](
