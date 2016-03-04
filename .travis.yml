@@ -1,3 +1,7 @@
+branches:
+  except:
+    - hg-git
+
 language: python
 python:
   - '2.7'
