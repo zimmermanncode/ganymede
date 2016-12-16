@@ -1,35 +1,3 @@
-
-
-|image0| Ganymede
-=================
-
-.. |image0| image:: https://bitbucket.org/userzimmermann/ganymede/raw/default/ganymede/static/ganymede.svg
-
-
-
-|image0| |image1| |image2|
-
-.. |image0| image:: https://pypip.in/v/ganymede/badge.svg
-   :target: https://pypi.python.org/pypi/ganymede
-.. |image1| image:: https://travis-ci.org/userzimmermann/ganymede.svg
-   :target: https://travis-ci.org/userzimmermann/ganymede
-.. |image2| image:: https://ci.appveyor.com/api/projects/status/49sp18ovmcpp9tmg?svg=true
-   :target: https://ci.appveyor.com/project/userzimmermann/ganymede
-
-
-
--  https://bitbucket.org/userzimmermann/ganymede
--  https://github.com/userzimmermann/ganymede
--  https://www.openhub.net/p/jupyter-ganymede
--  Includes `jQuery UI Touch Punch <http://touchpunch.furf.com>`__
-
-
-
-Hacking Jupyter's atmosphere
-----------------------------
-
-
-
 Have you also wondered where the fourth Galilean moon in
 `Jupyter <http://jupyter.org>`__'s logo has gone? Well, it is told that
 after many centuries of Ganymede's absence from Mount Olympus, Zeus felt
@@ -40,8 +8,6 @@ an offer. If Jupyter grant him shelter in his giant atmosphere then
 Ganymede would build him a new temple. A temple to attract a whole new
 generation of worshippers. Jupyter accepted...
 
-
-
 Currently, the temple can only be visited from Python. There will soon
 be other ways to get there. Just use `pip <http://pip-installer.org>`__
 to automatically install the latest
@@ -51,8 +17,6 @@ from `PyPI <https://pypi.python.org>`__:
 ::
 
     pip install ganymede
-
-
 
 It can also be visited in development mode, directly from Ganymede's
 repository. The additional development dependencies are automatically
@@ -68,16 +32,11 @@ directory:
 You also need an installed `CoffeeScript <http://coffeescript.org>`__
 compiler for development mode.
 
-
-
 Then open an IPython notebook in Jupyter's web interface and:
-
 
 .. code:: python
 
-
     %load_ext ganymede
-
 
 You will see the header area with menu and tool bar disappear and the
 notebook area turn into a console with three handle bars at the bottom,
@@ -85,13 +44,9 @@ the outer two for resizing and the inner one for combined vertical
 resizing and horizontal moving. A simple click on the latter toggles the
 console's visibility.
 
-
-
 At the top left window corner you will see Ganymede's logo. Just grab
 and move it around. It will reveal the new tool and menu area. A simple
 click toggles slim mode, which only shows the tools.
-
-
 
 You might wonder what's the essential advantage of these features. It
 will make more sense when you use the dynamic free background space to
@@ -101,20 +56,14 @@ drop it anywhere on the background. That won't change the cell's DOM
 hierarchy, so the output stays logically connected to the cell input and
 re-evaluating the cell will also update the undocked output.
 
-
-
 Thanks to the embedded jQuery UI Touch Punch, all that resizing and
 dragging also works via touch events.
-
-
 
 You can go back to the default Jupyter interface any time by deleting
 the ``%load_ext ganymede`` cell or just its output. You can also
 ``%reload_ext ganymede`` at any time. Size, positions and state of the
 console, the menu area and the output cells are stored as notebook and
 cell metadata respectively.
-
-
 
 Some of Jupyter's control elements are hidden, like the cell format and
 cell toolbar select boxes. They still need to find their new place,
@@ -129,4 +78,3 @@ along with these additional features coming soon:
 -  A %terminal magic to embed Jupyter's remote terminals in notebooks
 -  Tabbed multi-notebook console and ability to mix undocked cell
    outputs from different notebooks and kernels
-
