@@ -24,7 +24,7 @@ import json
 __version__ = '0.1.1'
 
 
-def load(shell, logo_src=None):
+def load(shell=None, logo_src=None):
     """
     Generate and return Ganymede HTML containing CSS and JavaScript
     for modifying the Jupyter notebook web interface,
