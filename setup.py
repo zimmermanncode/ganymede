@@ -22,7 +22,7 @@ setup(
 
   author="Stefan Zimmermann",
   author_email="<zimmermann.code@gmail.com>",
-  url="https://bitbucket.org/userzimmermann/ganymede",
+  url="https://github.com/zimmermanncode/ganymede",
 
   license='GPLv3',
 
