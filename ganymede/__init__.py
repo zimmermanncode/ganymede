@@ -24,44 +24,57 @@ import json
 __version__ = '0.1.1'
 
 
-def load():
-    """Generate and return Ganymede HTML containing CSS and JavaScript
-       for modifying the Jupyter notebook web interface.
+def load(shell, logo_src=None):
+    """
+    Generate and return Ganymede HTML containing CSS and JavaScript
+    for modifying the Jupyter notebook web interface,
+    wrapped in a ``IPython.display.HTML`` object:
+
+    * Must be called with IPython `shell` instance as first argument.
+    * Optionally takes a custom `logo_src` value for the ``src=`` attribute
+      of Ganymede's HTML logo ``<img>`` element.
     """
     # make sure that .static pkg gets reloaded on %reload_ext ganymede
     # to recompile ganymede.coffee in development (non-installed) mode
     sys.modules.pop('ganymede.static', None)
     from ganymede.static import CSS, JS, TOUCH_PUNCH_JS, SVG
 
+    if logo_src is None:
+        # load Ganymede's default logo
+        logo_src = 'data:image/svg+xml;base64,%s' \
+            % b64encode(SVG.bytes()).decode('ascii')
+
     # import locally to make this module importable in setup.py
     # without further dependencies
     from IPython.display import HTML
 
-    return HTML("""
-      <style id="ganymede-style" type="text/css">%s</style>
-      <script type="text/javascript">
-        %s
-      </script>
-      <script type="text/javascript">
-        %s
-        window.ganymede = new Ganymede(%s);
-      </script>
-      <script type="text/javascript">
-        $('#ganymede-style').on('remove', function () {
-            window.ganymede.unload();
-        });
-      </script>
-      """ % (CSS.text(), TOUCH_PUNCH_JS.text(), JS.text(),
-             json.dumps('data:image/svg+xml;base64,%s'
-                        % b64encode(SVG.bytes()).decode('ascii')),
-             ))
+    return HTML(u"""
+        <style id="ganymede-style" type="text/css">
+            {style}
+        </style>
+        <script type="text/javascript">
+            {touch_punch}
+        </script>
+        <script type="text/javascript">
+            {script}
+            window.ganymede = new Ganymede({logo_src});
+        </script>
+        <script type="text/javascript">
+            $('#ganymede-style').on('remove', function () {{
+                window.ganymede.unload();
+            }});
+        </script>
+    """.format(style=CSS.text('ascii'), script=JS.text('ascii'),
+               logo_src=json.dumps(logo_src),
+               touch_punch=TOUCH_PUNCH_JS.text('utf8')))
 
 
 def load_ipython_extension(shell):
-    """Called on ``%load_ext ganymede`` and ``%reload_ext ganymede``
+    """
+    Called from IPython on ``%load_ext ganymede`` and ``%reload_ext ganymede``
     """
     # import locally to make this module importable in setup.py
     # without further dependencies
     from IPython.display import display
 
-    display(load())
+    display(load(shell))
