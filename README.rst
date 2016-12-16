@@ -34,36 +34,10 @@ compiler for development mode.
 
 Then open an IPython notebook in Jupyter's web interface and:
 
-.. code:: python
 
-    %load_ext ganymede
+|image0|
 
-You will see the header area with menu and tool bar disappear and the
-notebook area turn into a console with three handle bars at the bottom,
-the outer two for resizing and the inner one for combined vertical
-resizing and horizontal moving. A simple click on the latter toggles the
-console's visibility.
-
-At the top left window corner you will see Ganymede's logo. Just grab
-and move it around. It will reveal the new tool and menu area. A simple
-click toggles slim mode, which only shows the tools.
-
-You might wonder what's the essential advantage of these features. It
-will make more sense when you use the dynamic free background space to
-place some cell outputs there. Just grab an ``Out[*]`` prompt area and
-drag it around. This will undock the output from the console and you can
-drop it anywhere on the background. That won't change the cell's DOM
-hierarchy, so the output stays logically connected to the cell input and
-re-evaluating the cell will also update the undocked output.
-
-Thanks to the embedded jQuery UI Touch Punch, all that resizing and
-dragging also works via touch events.
-
-You can go back to the default Jupyter interface any time by deleting
-the ``%load_ext ganymede`` cell or just its output. You can also
-``%reload_ext ganymede`` at any time. Size, positions and state of the
-console, the menu area and the output cells are stored as notebook and
-cell metadata respectively.
+.. |image0| image:: https://bitbucket.org/userzimmermann/ganymede/raw/default/ganymede/screenshot.png
 
 Some of Jupyter's control elements are hidden, like the cell format and
 cell toolbar select boxes. They still need to find their new place,
