@@ -43,7 +43,7 @@ You also need an installed [CoffeeScript](http://coffeescript.org) compiler for 
 Then open an IPython notebook in Jupyter's web interface and:
 
 
-![](https://bitbucket.org/userzimmermann/ganymede/raw/default/ganymede/screenshot.png)
+![](https://bitbucket.org/userzimmermann/ganymede/raw/default/screenshot.png)
 
 Some of Jupyter's control elements are hidden, like the cell format and cell toolbar select boxes. They still need to find their new place, along with these additional features coming soon:
 
