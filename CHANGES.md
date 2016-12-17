@@ -1,3 +1,9 @@
+__0.2.0__
+
+* Fixes encoding issues on loading and embedding jQuery UI Touch Punch
+* Adds optional `shell` and `logo_src` args to `load` function
+* Hides **CellToolbar** button
+
 __0.1.1__
 
 * Embedded jQuery UI Touch Punch
