@@ -3,6 +3,7 @@ python:
   - '2.7'
   - '3.3'
   - '3.4'
+  - '3.5'
   - pypy
 
 install:
@@ -12,8 +13,8 @@ install:
   - pip install -r requirements.dev.txt
   - pip install -e .
   - pip install pytest
-  - pip install tox
+  - pip install tox tox-travis
 
 script:
-  - py.test -v test
+  - py.test -vv test
   - tox -rv
