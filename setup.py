@@ -22,7 +22,7 @@ setup(
     description="Hacking Jupyter's atmosphere",
 
     author="Stefan Zimmermann",
-    author_email="<zimmermann.code@gmail.com>",
+    author_email="zimmermann.code@gmail.com",
     url="https://github.com/zimmermanncode/ganymede",
 
     license='GPLv3',
