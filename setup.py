@@ -20,6 +20,7 @@ setup(
     name='ganymede',
     version=ganymede.__version__,
     description="Hacking Jupyter's atmosphere",
+    long_description=open(os.path.join(ROOT, 'README.rst')).read(),
 
     author="Stefan Zimmermann",
     author_email="zimmermann.code@gmail.com",
