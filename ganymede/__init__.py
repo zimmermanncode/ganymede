@@ -72,6 +72,8 @@ def load(shell=None, logo_src=None):
 def load_ipython_extension(shell):
     """
     Called from IPython on ``%load_ext ganymede`` and ``%reload_ext ganymede``
+
+    Calls :func:`ganymede.load` which does the actual magic.
     """
     # import locally to make this module importable in setup.py
     # without further dependencies
