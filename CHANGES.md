@@ -4,6 +4,13 @@ __0.2.0__
 * Adds optional `shell` and `logo_src` args to `load` function
 * Hides **CellToolbar** button
 
+* __.post0__:
+  * Fixed `author_email` in **setup.py**
+
+* __.post1__:
+  * Added `long_description` to **setup.py**
+
+
 __0.1.1__
 
 * Embedded jQuery UI Touch Punch
