@@ -23,7 +23,7 @@ setup(
     long_description=open(os.path.join(ROOT, 'README.rst')).read(),
 
     author="Stefan Zimmermann",
-    author_email="zimmermann.code@gmail.com",
+    author_email="user@zimmermann.co",
     url="https://github.com/zimmermanncode/ganymede",
 
     license='GPLv3',
