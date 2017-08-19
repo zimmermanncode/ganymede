@@ -294,6 +294,10 @@ class Ganymede.Console
             if metadata.undocked is true
                 $output = $('.output_wrapper', cell)
                 $output.addClass 'ganymede'
+                if $output.hasClass 'ui-resizable'
+                    $output.resizable 'enable'
+                else
+                    $output.resizable()
                 $output.css
                     position: 'fixed'
                     'z-index': z = metadata['z-index'] or -1
@@ -343,11 +347,17 @@ class Ganymede.Console
                     ).output ?= {}
                 $.extend metadata, $output.offset()
                 @$.removeClass 'collapsed'
+                if $output.hasClass 'ui-resizable'
+                    $output.resizable 'enable'
+                else
+                    $output.resizable()
                 @update()
         @
 
     unload: ->
         $outputs = $('.output_wrapper', @$).removeClass 'ganymede'
+        # $outputs.draggable 'destroy'
+        $outputs.filter('.ui-resizable').resizable 'destroy'
         $outputs.css
             'z-index': ''
             position: ''
