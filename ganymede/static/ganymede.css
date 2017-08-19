@@ -267,5 +267,49 @@
   position: fixed;
   z-index: 200;
   border: thin solid #ababab;
-  border-radius: 2px;
+  border-right-width: 5px;
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 3px 3px 10px #777;
+}
+
+.output_wrapper.ganymede .out_prompt_overlay {
+    min-width: 5ex;
+    width: 5ex;
+    background-color: #ababab;
+}
+
+.output_wrapper.ganymede .prompt {
+    min-width: 5ex;
+    width: 5ex;
+}
+
+.output_wrapper.ganymede .output_subarea {
+    max-width: none;
+}
+
+.output_wrapper.ganymede .ui-resizable-se {
+    border-top-left-radius: 100%;
+    border-bottom-right-radius: 1px;
+    background-color: #ababab;
+    box-shadow: 2px 2px 2px #777;
+}
+
+.cell:hover .output_wrapper.ganymede {
+    border-color: #42A5F5;
+}
+
+.out_prompt_overlay:hover,
+.output_wrapper.ganymede .out_prompt_overlay:hover {
+    background-color: #42A5F5;
+}
+
+.output_wrapper.ganymede .ui-resizable-se:hover {
+    background-color: #42A5F5;
+}
+
+.cell:hover {
+    background-color: #eee;
 }
