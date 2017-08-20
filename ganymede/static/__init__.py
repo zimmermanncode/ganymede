@@ -32,7 +32,7 @@ JS = DIR / 'ganymede.js'
 TOUCH_PUNCH_JS = DIR / 'jquery.ui.touch-punch.min.js'
 
 
-if COFFEE.exists(): #==> development mode (not installed) ==> compile
+if COFFEE.exists():  # ==> development mode (not installed) ==> compile
     # import conditionally to avoid general dependency
     from coffeetools import coffee
 
