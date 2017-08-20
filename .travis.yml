@@ -26,6 +26,9 @@ script:
   - py.test -vv test
   - tox -rv
 
+before_deploy:
+  - npm install coffee-script
+  - export PATH="$(npm bin):$PATH"
 deploy:
   provider: pypi
   user: userzimmermann
