@@ -15,7 +15,7 @@ install:
       if [ $TRAVIS_PYTHON_VERSION == 2.7 -o $TRAVIS_PYTHON_VERSION == pypy ] ;
       then
           pip install "ipython<6.0"
-      ; fi
+      fi
   - pip install -r requirements.txt
   - pip install -r requirements.dev.txt
   - pip install -e .
