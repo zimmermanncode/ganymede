@@ -256,6 +256,7 @@ class Ganymede.Console
 
         $('#notebook-container').on 'resize.ganymede-console', =>
             @updateOutputs()
+        @updateOutputs()
         $(window).on 'resize.ganymede-console', =>
             @update()
         @update()
