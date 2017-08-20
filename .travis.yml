@@ -19,3 +19,9 @@ install:
 script:
   - py.test -vv test
   - tox -rv
+
+deploy:
+  provider: pypi
+  user: userzimmermann
+  password:
+    secure: JL/sC/fdiUecgG4BJKICznW9QWiWHAN1eUxeUzMlWJU9RoydfYXYXvbp32kKdqLc5D4IMGUSt5A/dIs2knoQFNE672+DXaLOovRjb59Ff6sr6yhmtYJIZXuNvay6FzjHHtI/ISjWh4bjqF39w3cWhakeLZyLW2SxKMnbInBZkjvAUR6AXaQadUdkqXOLlTHzGHpXl7MQxA7W6xftWrGMWjFeBJGW8FvAsvpDuA7ypEBhjIJH9rdj9KDoB8hXkJKfD3/2RoOmVw5Ts+G+xnWgQFJrNXkniPQ2BMBnziTU6DLLcA7BqyPQVNuEOtVRJfyvNqUUqfHucI6oc26JS6eHfuRLCzD7XQJnkKVAz545WpGTBdCQEFmr7fs+6wi3MjHvwuVutnB1s1g7NpalkMQEj8raalRXwlaLPh1dYb0L2Pbx+p37/F0foeMDrVUBi+zX/UbxKx+WeaAcrPc+hN8JfGsST+4YL9prAfPfpbDUYFPdwQOTKtE7O1PTKcpigRfTgOPgzftORRs4/OdB4CPhUGCYJTOS+NK2mXeXYunSYB/fNSkbdxFwd5C/xVcLvLwx4icXdSwzV1KCY0Hn1AqWqTaWTk7oDlkbHo872EL1+GQAEgMxWsfbGuiOoDlRDFmg5FJE08UKiiyOFIy/fYiu+AbYbk5SxSEoZ4TG14LzDoM=
