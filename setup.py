@@ -8,10 +8,9 @@ ROOT = os.path.dirname(os.path.realpath(__file__))
 
 sys.path.insert(0, ROOT)
 
-import ganymede
 if os.path.exists(os.path.join(
-  ROOT, 'ganymede', 'static', 'ganymede.coffee'
-  )):
+        ROOT, 'ganymede', 'static', 'ganymede.coffee'
+)):
     # trigger ganymede.coffee-->.js compilation
     import ganymede.static
 
@@ -41,7 +40,7 @@ setup(
     },
 
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         'Operating System :: OS Independent',
