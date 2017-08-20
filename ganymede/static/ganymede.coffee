@@ -313,7 +313,8 @@ class Ganymede.Console
             handle: '.out_prompt_overlay'
             start: (event) =>
                 $output = $(event.target)
-                @$.addClass 'collapsed'
+                if not @$.hasClass 'collapsed'
+                    @$.addClass 'collapsed ganymede-output-drag'
                 @update()
                 #HACK: keep current offset...
                 if not $output.hasClass 'ganymede'
@@ -346,7 +347,8 @@ class Ganymede.Console
                     .data('cell').metadata.ganymede ?= {}
                     ).output ?= {}
                 $.extend metadata, $output.offset()
-                @$.removeClass 'collapsed'
+                if @$.hasClass 'ganymede-output-drag'
+                    @$.removeClass 'collapsed ganymede-output-drag'
                 if $output.hasClass 'ui-resizable'
                     $output.resizable 'enable'
                 else
