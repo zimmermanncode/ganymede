@@ -21,7 +21,7 @@ import sys
 from base64 import b64encode
 import json
 
-__version__ = '0.2.0.post1'
+from .__version__ import version as __version__
 
 
 def load(shell=None, logo_src=None):
