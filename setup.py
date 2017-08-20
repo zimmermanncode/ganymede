@@ -11,7 +11,11 @@ sys.path.insert(0, ROOT)
 if os.path.exists(os.path.join(
         ROOT, 'ganymede', 'static', 'ganymede.coffee'
 )):
-    # trigger ganymede.coffee-->.js compilation
+    # ==> trigger ganymede.coffee-->.js compilation
+    # (which needs version)
+    from setuptools_scm import get_version
+    get_version(write_to='ganymede/__version__.py')
+
     import ganymede.static
 
 
