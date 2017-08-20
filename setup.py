@@ -18,7 +18,6 @@ if os.path.exists(os.path.join(
 
 setup(
     name='ganymede',
-    version=ganymede.__version__,
     description="Hacking Jupyter's atmosphere",
     long_description=open(os.path.join(ROOT, 'README.rst')).read(),
 
@@ -28,7 +27,10 @@ setup(
 
     license='GPLv3',
 
+    setup_requires=open(os.path.join(ROOT, 'requirements.setup.txt')).read(),
     install_requires=open(os.path.join(ROOT, 'requirements.txt')).read(),
+
+    use_scm_version={'write_to': 'ganymede/__version__.py'},
 
     packages=[
         'ganymede',
@@ -50,6 +52,7 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: JavaScript',
         'Topic :: Software Development',
         'Topic :: Utilities',
