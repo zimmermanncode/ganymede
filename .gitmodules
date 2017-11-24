@@ -1,0 +1,3 @@
+[submodule "declarativewidgets"]
+	path = declarativewidgets
+	url = https://github.com/userzimmermann/declarativewidgets
