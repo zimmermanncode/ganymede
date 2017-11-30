@@ -38,3 +38,6 @@ BOWER_DEPENDENCIES = dict({
     dep for urth_path in __path__[-1].dirs()
     for dep in (json.loads((urth_path / 'bower.json').text())
                 .get('dependencies', {}).items())})
+
+# restrict polymer to <1.6 for urth-core-bind compatibility
+BOWER_DEPENDENCIES['polymer'] += " <1.6"
