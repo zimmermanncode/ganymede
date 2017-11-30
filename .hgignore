@@ -12,3 +12,4 @@
 ganymede/static/ganymede.js
 ^\.ipynb
 
+^jupyter-declarativewidgets/
