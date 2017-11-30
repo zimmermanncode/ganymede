@@ -21,6 +21,8 @@ import sys
 from base64 import b64encode
 import json
 
+from path import Path
+
 from .__version__ import version as __version__
 
 
@@ -80,3 +82,38 @@ def load_ipython_extension(shell):
     from IPython.display import display
 
     display(load(shell))
+
+
+def load_jupyter_server_extension(app):
+    from ganymede.widgets.ext import urth_import
+
+    urth_import.load_jupyter_server_extension(app)
+
+
+def _jupyter_nbextension_paths():
+    from ganymede.static import urth, urth_components
+
+    return [
+        {
+            'section': 'notebook',
+            'src': 'static',
+            'dest': 'ganymede',
+            'require': 'ganymede/ganymede',
+        },
+        {
+            'section': 'notebook',
+            'src': urth.__path__[-1],
+            'dest': 'declarativewidgets',
+            'require': 'declarativewidgets/js/main',
+        },
+        {
+            'section': 'notebook',
+            'src': urth_components.__path__[-1],
+            'dest': 'declarativewidgets/urth_components',
+            'require': 'declarativewidgets/js/main',
+        },
+    ]
+
+
+def _jupyter_server_extension_paths():
+    return [{'module': 'ganymede'}]
