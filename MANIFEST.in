@@ -13,5 +13,10 @@ exclude *.ini
 exclude *.ipynb
 exclude *.svg
 
-recursive-include ganymede/static *.svg *.css *.js
+recursive-include ganymede/static *.css *.js *.svg
 recursive-exclude ganymede/static *.coffee
+
+include jupyter-declarativewidgets/nb-extension/.bowerrc
+
+recursive-include jupyter-declarativewidgets/nb-extension *.css *.js *.json
+recursive-include jupyter-declarativewidgets/elements *.css *.html *.js
