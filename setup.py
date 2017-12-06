@@ -14,7 +14,8 @@ if os.path.exists(os.path.join(
     # ==> trigger ganymede.coffee-->.js compilation
     # (which needs version)
     from setuptools_scm import get_version
-    get_version(write_to='ganymede/__version__.py')
+    get_version(local_scheme=lambda _: '',
+                write_to='ganymede/__version__.py')
 
     import ganymede.static
 
@@ -33,7 +34,10 @@ setup(
     setup_requires=open(os.path.join(ROOT, 'requirements.setup.txt')).read(),
     install_requires=open(os.path.join(ROOT, 'requirements.txt')).read(),
 
-    use_scm_version={'write_to': 'ganymede/__version__.py'},
+    use_scm_version={
+        'local_scheme': lambda _: '',
+        'write_to': 'ganymede/__version__.py',
+    },
 
     packages=[
         'ganymede',
