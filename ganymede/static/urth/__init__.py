@@ -35,6 +35,13 @@ from ganymede.static.urth_components import BOWER_DEPENDENCIES
 __path__.append(DECLARATIVEWIDGETS_REPO / 'nb-extension')
 
 
+_BOWERRC = __path__[-1] / '.bowerrc'
+
+_BOWERRC.write_text(json.dumps({
+    'directory': 'urth_components',
+}, indent=2))
+
+
 BOWER_JSON = __path__[-1] / 'bower.json'
 
 BOWER_JSON.write_text(json.dumps({
