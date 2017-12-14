@@ -81,6 +81,9 @@ def load_ipython_extension(shell):
     # without further dependencies
     from IPython.display import display
 
+    # and trigger initialization of declarativewidgets
+    import ganymede.widgets
+
     display(load(shell))
 
 
