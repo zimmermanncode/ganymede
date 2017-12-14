@@ -1,0 +1,17 @@
+*~
+*.diff
+*.log
+*.orig
+*.pyc
+
+*.egg-info/
+.eggs/
+.hg/
+.ipynb*/
+.tox/
+
+__pycache__/
+dist/
+node_modules/
+
+ganymede/static/ganymede.js
