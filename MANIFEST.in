@@ -21,4 +21,4 @@ include jupyter-declarativewidgets/nb-extension/.bowerrc
 recursive-include jupyter-declarativewidgets/nb-extension *.css *.js *.json
 recursive-include jupyter-declarativewidgets/elements *.css *.html *.js
 
-recursive-include jupyter-declarativewidgets_explorer *.html *.js
+recursive-include jupyter-declarativewidgets_explorer *.html *.js *.json
