@@ -17,6 +17,11 @@ if DECLARATIVEWIDGETS_REPO.exists():
     sys.path.insert(0, DECLARATIVEWIDGETS_REPO / 'kernel-python')
 
 
+DECLARATIVEWIDGETS_EXPLORER_REPO = (
+    DECLARATIVEWIDGETS_REPO.dirname() /
+    'jupyter-declarativewidgets_explorer')
+
+
 import declarativewidgets
 
 

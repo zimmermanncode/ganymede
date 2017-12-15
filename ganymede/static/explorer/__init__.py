@@ -18,27 +18,13 @@
 # along with ganymede. If not, see <http://www.gnu.org/licenses/>.
 
 """
-Setup proxy to ``jupyter-declarativewidgets/elements``.
+Setup proxy to ``jupyter-declarativewidgets_explorer``.
 
-``__path__`` gets extended with the above, and ``BOWER_DEPENDENCIES`` get
-collected from all contained ``urth-*`` components
+``__path__`` gets extended with the above, and contained ``bower.json``
+is used by ``.urth_components`` to extend its ``BOWER_DEPENDENCIES``
 """
 
-import json
-
-from path import Path
-
-from ganymede.widgets import DECLARATIVEWIDGETS_REPO
-from ganymede.static import explorer
+from ganymede.widgets import DECLARATIVEWIDGETS_EXPLORER_REPO
 
 
-__path__.append(DECLARATIVEWIDGETS_REPO / 'elements')
-
-
-BOWER_DEPENDENCIES = dict({
-    dep for urth_path in list(__path__[-1].dirs()) + [explorer.__path__[-1]]
-    for dep in (json.loads((urth_path / 'bower.json').text())
-                .get('dependencies', {}).items())})
-
-# restrict polymer to <1.6 for urth-core-bind compatibility
-BOWER_DEPENDENCIES['polymer'] += " <1.6"
+__path__.append(DECLARATIVEWIDGETS_EXPLORER_REPO)

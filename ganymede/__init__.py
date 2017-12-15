@@ -94,7 +94,7 @@ def load_jupyter_server_extension(app):
 
 
 def _jupyter_nbextension_paths():
-    from ganymede.static import urth, urth_components
+    from ganymede.static import urth, urth_components, explorer
 
     return [
         {
@@ -113,6 +113,13 @@ def _jupyter_nbextension_paths():
             'section': 'notebook',
             'src': urth_components.__path__[-1],
             'dest': 'declarativewidgets/urth_components',
+            'require': 'declarativewidgets/js/main',
+        },
+        {
+            'section': 'notebook',
+            'src': explorer.__path__[-1],
+            'dest': ('declarativewidgets/urth_components/'
+                     'declarativewidgets-explorer'),
             'require': 'declarativewidgets/js/main',
         },
     ]

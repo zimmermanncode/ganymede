@@ -28,6 +28,10 @@ if os.path.exists(DECLARATIVEWIDGETS_ROOT):
     import ganymede.static.urth
 
 
+DECLARATIVEWIDGETS_EXPLORER_ROOT = os.path.join(
+    ROOT, 'jupyter-declarativewidgets_explorer')
+
+
 PACKAGES = [
     'ganymede',
     'ganymede.static',
@@ -63,6 +67,7 @@ STATIC_URTH = {
         ('urth',  'nb-extension'),
         ('urth_components', 'elements'),
     ]}
+STATIC_URTH['ganymede.static.explorer'] = DECLARATIVEWIDGETS_EXPLORER_ROOT
 
 PACKAGES.extend(STATIC_URTH)
 
