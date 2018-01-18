@@ -19,11 +19,12 @@ install:
   - pip install -r requirements.txt
   - pip install -r requirements.dev.txt
   - pip install -e .
-  - pip install pytest
+  - pip install pytest robotframework
   - pip install tox tox-travis
 
 script:
   - py.test -vv test
+  - robot test
   - tox -rv
 
 before_deploy:
