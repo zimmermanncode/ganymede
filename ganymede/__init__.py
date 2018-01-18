@@ -105,19 +105,19 @@ def _jupyter_nbextension_paths():
         },
         {
             'section': 'notebook',
-            'src': urth.__path__[-1],
+            'src': list(urth.__path__)[-1],
             'dest': 'declarativewidgets',
             'require': 'declarativewidgets/js/main',
         },
         {
             'section': 'notebook',
-            'src': urth_components.__path__[-1],
+            'src': list(urth_components.__path__)[-1],
             'dest': 'declarativewidgets/urth_components',
             'require': 'declarativewidgets/js/main',
         },
         {
             'section': 'notebook',
-            'src': explorer.__path__[-1],
+            'src': list(explorer.__path__)[-1],
             'dest': ('declarativewidgets/urth_components/'
                      'declarativewidgets-explorer'),
             'require': 'declarativewidgets/js/main',
