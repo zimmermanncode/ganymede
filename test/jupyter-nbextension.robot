@@ -18,7 +18,7 @@ Install
    @{matches} =   Get Regexp Matches   ${output}
    ...   Installing [^>]+ -> (?P<dest>[^\\s]+)   dest
    Should Be Equal   ${expected nbextension dirs}   ${matches}
-   @{matches} =   Get Regexp Matches   ${output}   - Validating: ok
+   @{matches} =   Get Regexp Matches   ${output}   - Validating: (OK|ok)
    Length Should Be   ${matches}   4
 
 Enable
@@ -32,5 +32,5 @@ Enable
    @{matches} =   Get Regexp Matches   ${output}
    ...   Enabling notebook extension (?P<path>[^\\.]+)   path
    Should Be Equal   ${expected nbextension js paths}   ${matches}
-   @{matches} =   Get Regexp Matches   ${output}   - Validating: ok
+   @{matches} =   Get Regexp Matches   ${output}   - Validating: (OK|ok)
    Length Should Be   ${matches}   4

@@ -8,4 +8,4 @@ Resource   ./jupyter.robot
 Enable
    ${result}   ${output} =   Run Jupyter Process
    ...   serverextension   enable   ganymede
-   Should Match Regexp   ${output}   - Validating...\\s+ganymede\\s+ok
+   Should Match Regexp   ${output}   - Validating...\\s+ganymede\\s+(OK|ok)
