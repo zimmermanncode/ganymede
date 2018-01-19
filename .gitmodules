@@ -1,6 +1,6 @@
 [submodule "jupyter-declarativewidgets"]
 	path = jupyter-declarativewidgets
-	url = git@github.com:userzimmermann/declarativewidgets.git
+	url = https://github.com/userzimmermann/declarativewidgets.git
 [submodule "jupyter-declarativewidgets_explorer"]
 	path = jupyter-declarativewidgets_explorer
-	url = git@github.com:userzimmermann/declarativewidgets_explorer.git
+	url = https://github.com/userzimmermann/declarativewidgets_explorer.git
