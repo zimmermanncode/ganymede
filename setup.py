@@ -107,6 +107,8 @@ setup(
     setup_requires=open(os.path.join(ROOT, 'requirements.setup.txt')).read(),
     install_requires=open(os.path.join(ROOT, 'requirements.txt')).read(),
 
+    require_node_modules=['bower'],
+
     use_scm_version={
         'local_scheme': lambda _: '',
         'write_to': 'ganymede/__version__.py',
