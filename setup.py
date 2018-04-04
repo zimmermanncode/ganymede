@@ -21,7 +21,7 @@ if os.path.exists(os.path.join(
     import ganymede.static
 
 
-DECLARATIVEWIDGETS_ROOT = os.path.join(ROOT, 'jupyter-declarativewidgets')
+DECLARATIVEWIDGETS_ROOT = os.path.join(ROOT, 'ganymede-declarativewidgets')
 
 if os.path.exists(DECLARATIVEWIDGETS_ROOT):
     # ==> trigger bower.json creation
@@ -29,7 +29,7 @@ if os.path.exists(DECLARATIVEWIDGETS_ROOT):
 
 
 DECLARATIVEWIDGETS_EXPLORER_ROOT = os.path.join(
-    ROOT, 'jupyter-declarativewidgets_explorer')
+    ROOT, 'ganymede-declarativewidgets_explorer')
 
 
 PACKAGES = [

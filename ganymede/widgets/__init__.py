@@ -11,7 +11,7 @@ import ganymede
 
 DECLARATIVEWIDGETS_REPO = (
     Path(ganymede.__file__).realpath().dirname().dirname() /
-    'jupyter-declarativewidgets')
+    'ganymede-declarativewidgets')
 
 if DECLARATIVEWIDGETS_REPO.exists():
     sys.path.insert(0, DECLARATIVEWIDGETS_REPO / 'kernel-python')
@@ -19,7 +19,7 @@ if DECLARATIVEWIDGETS_REPO.exists():
 
 DECLARATIVEWIDGETS_EXPLORER_REPO = (
     DECLARATIVEWIDGETS_REPO.dirname() /
-    'jupyter-declarativewidgets_explorer')
+    'ganymede-declarativewidgets_explorer')
 
 
 def init_declarativewidgets():

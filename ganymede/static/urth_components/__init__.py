@@ -18,7 +18,7 @@
 # along with ganymede. If not, see <http://www.gnu.org/licenses/>.
 
 """
-Setup proxy to ``jupyter-declarativewidgets/elements``.
+Setup proxy to ``ganymede-declarativewidgets/elements``.
 
 ``__path__`` gets extended with the above, and ``BOWER_DEPENDENCIES`` get
 collected from all contained ``urth-*`` components

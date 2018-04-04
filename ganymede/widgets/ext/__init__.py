@@ -21,7 +21,7 @@
 Setup proxy to ``urth.widgets.ext``.
 
 ``__path__`` gets extended with
-``jupyter-declarativewidgets/nb-extension/python/urth/widgets/ext``
+``ganymede-declarativewidgets/nb-extension/python/urth/widgets/ext``
 """
 
 from ganymede.widgets import DECLARATIVEWIDGETS_REPO
