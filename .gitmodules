@@ -1,6 +1,6 @@
 [submodule "ganymede-declarativewidgets"]
 	path = ganymede-declarativewidgets
-	url = https://github.com/userzimmermann/declarativewidgets.git
+	url = https://github.com/hackingmoon/ganymede-declarativewidgets.git
 [submodule "ganymede-declarativewidgets_explorer"]
 	path = ganymede-declarativewidgets_explorer
-	url = https://github.com/userzimmermann/declarativewidgets_explorer.git
+	url = https://github.com/hackingmoon/ganymede-declarativewidgets_explorer.git
