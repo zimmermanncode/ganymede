@@ -39,6 +39,6 @@ def init_declarativewidgets():
 
     if ext_path is not None:
         with Path(ext_path):
-            nodely.bin['bower'](['install'])
+            nodely.bin['bower'](['--allow-root', 'install'])
 
     declarativewidgets.init()
