@@ -3,6 +3,8 @@
 \.diff$
 \.orig$
 
+\.log$
+
 \.env/
 \.egg-info/
 ^dist/
@@ -14,3 +16,6 @@ ganymede/static/ganymede.js
 
 ^jupyter-declarativewidgets/
 ^jupyter-declarativewidgets_explorer/
+
+^\.idea/
+^cmake-
