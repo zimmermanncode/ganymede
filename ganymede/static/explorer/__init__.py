@@ -18,7 +18,7 @@
 # along with ganymede. If not, see <http://www.gnu.org/licenses/>.
 
 """
-Setup proxy to ``jupyter-declarativewidgets_explorer``.
+Setup proxy to ``ganymede-declarativewidgets_explorer``.
 
 ``__path__`` gets extended with the above, and contained ``bower.json``
 is used by ``.urth_components`` to extend its ``BOWER_DEPENDENCIES``

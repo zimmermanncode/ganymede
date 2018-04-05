@@ -14,8 +14,8 @@
 ganymede/static/ganymede.js
 ^\.ipynb
 
-^jupyter-declarativewidgets/
-^jupyter-declarativewidgets_explorer/
+^ganymede-declarativewidgets/
+^ganymede-declarativewidgets_explorer/
 
 ^\.idea/
 ^cmake-

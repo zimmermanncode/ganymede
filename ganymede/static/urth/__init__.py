@@ -18,7 +18,7 @@
 # along with ganymede. If not, see <http://www.gnu.org/licenses/>.
 
 """
-Setup proxy to ``jupyter-declarativewidgets/nb-extension``.
+Setup proxy to ``ganymede-declarativewidgets/nb-extension``.
 
 ``__path__`` gets extended with the above, and a ``bower.json`` is written
 there, which contains all dependencies from all ``urth-*`` components

@@ -16,9 +16,9 @@ exclude *.svg
 recursive-include ganymede/static *.css *.js *.svg
 recursive-exclude ganymede/static *.coffee
 
-include jupyter-declarativewidgets/nb-extension/.bowerrc
+include ganymede-declarativewidgets/nb-extension/.bowerrc
 
-recursive-include jupyter-declarativewidgets/nb-extension *.css *.js *.json
-recursive-include jupyter-declarativewidgets/elements *.css *.html *.js
+recursive-include ganymede-declarativewidgets/nb-extension *.css *.js *.json
+recursive-include ganymede-declarativewidgets/elements *.css *.html *.js
 
-recursive-include jupyter-declarativewidgets_explorer *.html *.js *.json
+recursive-include ganymede-declarativewidgets_explorer *.html *.js *.json

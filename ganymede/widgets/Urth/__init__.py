@@ -7,6 +7,8 @@
 # from IPython import get_ipython
 # from IPython.display import display, HTML, Javascript
 
+from declarativewidgets import Channels, channel
+
 from .element import Element
 from .channel import Channel
 from .container import Container, HBox, VBox
@@ -15,7 +17,9 @@ from .polymer import Polymer
 from .template import Template
 
 __all__ = ('Element', 'Channel', 'Container', 'HBox', 'VBox',
-           'Component', 'Import', 'Polymer', 'Template')
+           'Component', 'Import', 'Polymer', 'Template',
+           # from declarativewidgets
+           'Channels', 'channel')
 
 
 # class component(object):
