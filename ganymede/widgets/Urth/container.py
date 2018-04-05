@@ -11,18 +11,21 @@ class Container(Element):
         html_attrs.setdefault('class', ' '.join(html_class))
         super().__init__('div', children=children, **html_attrs)
 
-    def import_links(self):
+    def urth_imports(self):
         links = set()
         for element in self.children:
             if isinstance(element, Container):
-                links.update(element.import_links())
+                links.update(element.urth_imports())
             if isinstance(element, Component):
-                links.add(element.import_link())
+                links.add(element.urth_import)
         return links
+
+    def bower_endpoints(self):
+        return {imp.bower_endpoint for imp in self.urth_imports()}
 
     def to_html(self):
         return "{}\n{}".format(
-            "\n".join(link.to_html() for link in self.import_links()),
+            "\n".join(imp.to_html() for imp in self.urth_imports()),
             super().to_html())
 
 

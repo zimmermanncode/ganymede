@@ -2,6 +2,8 @@
 Pythonic API for Urth channels.
 """
 
+from moretools import isdict
+
 import declarativewidgets
 
 from .element import Element
@@ -13,9 +15,19 @@ class Meta(type(Element)):
 
 class Channel(Element, metaclass=Meta):
 
-    def __init__(self, name, **html_attrs):
+    def __init__(self, name, items=None, **html_attrs):
         html_attrs.setdefault('name', name)
-        super().__init__('urth-core-channel', html_attrs)
+        children = []
+        if items is not None:
+            if isdict(items):
+                items = items.items()
+            for item in items:
+                if not isinstance(item, Item):
+                    key, value = item
+                    item = Item(key, value)
+                children.append(item)
+        super().__init__('urth-core-channel', children=children,
+                         **html_attrs)
         self._channel = declarativewidgets.channel(name)
 
     @property
@@ -35,8 +47,14 @@ class Channel(Element, metaclass=Meta):
     def __setitem__(self, key, value):
         self._channel.set(key, value)
 
-    def to_html(self):
-        return str(self)
 
+class Item(Element):
+
+    def __init__(self, key, value):
+        super().__init__('urth-core-channel-item',
+                         key=key, value=str(value))
+
+
+Meta.Item = Item
 
 Meta.default = Channel('default')

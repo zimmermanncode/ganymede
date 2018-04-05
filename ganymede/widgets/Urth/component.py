@@ -20,12 +20,17 @@ class Component(Element):
                 self.package_owner == other.package_owner and
                 self.version_spec == other.version_spec)
 
-    def import_link(self):
+    @property
+    def urth_import(self):
         return Import(self._element.tag, package_owner=self.package_owner,
                       version_spec=self.version_spec)
 
+    @property
+    def bower_endpoint(self):
+        return self.urth_import.bower_endpoint
+
     def to_html(self):
-        return "{}\n{}".format(self.import_link().to_html(),
+        return "{}\n{}".format(self.urth_import.to_html(),
                                super().to_html())
 
 
@@ -43,3 +48,7 @@ class Import(Element):
             'package': package,
             'href': 'urth_components/{name}/{name}.html'.format(name=name),
         })
+
+    @property
+    def bower_endpoint(self):
+        return self._element.get('package')

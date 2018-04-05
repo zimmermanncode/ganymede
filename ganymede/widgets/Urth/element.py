@@ -6,8 +6,8 @@ import lxml.etree
 
 class Element:
 
-    def __init__(self, name, children=None, **html_attrs):
-        self._element = lxml.etree.Element(name, attrib=html_attrs)
+    def __init__(self, tag, children=None, **html_attrs):
+        self._element = lxml.etree.Element(tag, attrib=html_attrs)
         self.children = list(children) if children is not None else []
 
     def __eq__(self, other):
