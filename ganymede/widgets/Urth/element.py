@@ -46,6 +46,16 @@ class Element:
             root.append(element._element_tree())
         return root
 
+    @property
+    def text(self):
+        return self._element.text
+
+    @text.setter
+    def text(self, value):
+        if value is not None:
+            value = str(value)
+        self._element.text = value
+
     def to_html(self):
         return lxml.html.tostring(self._element_tree(), encoding='unicode',
                                   pretty_print=True)
