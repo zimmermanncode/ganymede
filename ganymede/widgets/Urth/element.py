@@ -1,13 +1,17 @@
 from copy import copy
 
 from IPython.display import display, HTML
-import lxml.etree
+import lxml.html
 
 
 class Element:
 
     def __init__(self, tag, children=None, **html_attrs):
-        self._element = lxml.etree.Element(tag, attrib=html_attrs)
+        self._element = lxml.html.Element(tag)
+        # Element(tag, attrib=...) doesn't support None values,
+        # but HtmlElement.set() does (for valueless HTML attributes)
+        for key, value in html_attrs.items():
+            self._element.set(key, value)
         self.children = list(children) if children is not None else []
 
     def __eq__(self, other):
@@ -28,8 +32,8 @@ class Element:
         return root
 
     def to_html(self):
-        return lxml.etree.tounicode(self._element_tree(), method='html',
-                                    pretty_print=True)
+        return lxml.html.tostring(self._element_tree(), encoding='unicode',
+                                  pretty_print=True)
 
     def print_html(self):
         print(self.to_html())
@@ -40,4 +44,5 @@ class Element:
     def __repr__(self):
         return "Urth.{} {}".format(
             type(self).__qualname__,
-            lxml.etree.tounicode(self._element_tree()))
+            lxml.html.tostring(self._element_tree(), encoding='unicode',
+                               pretty_print=True))
