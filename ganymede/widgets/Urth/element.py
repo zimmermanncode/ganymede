@@ -4,6 +4,9 @@ from IPython.display import display, HTML
 import lxml.html
 
 
+CONTEXT_STACK = []
+
+
 class Element:
 
     def __init__(self, tag, children=None, **html_attrs):
@@ -13,6 +16,18 @@ class Element:
         for key, value in html_attrs.items():
             self._element.set(key, value)
         self.children = list(children) if children is not None else []
+        # are we inside a `with` context of another Element?
+        if CONTEXT_STACK:
+            CONTEXT_STACK[-1].children.append(self)
+
+    def __enter__(self):
+        CONTEXT_STACK.append(self)
+
+    def __exit__(self, exc_type, exc, traceback):
+        assert CONTEXT_STACK[-1] is self
+        CONTEXT_STACK.pop(-1)
+        if exc is not None:
+            raise exc.with_traceback(traceback)
 
     def __eq__(self, other):
         return (self._element.tag == other._element.tag and
