@@ -10,7 +10,7 @@ from .element import Element
 
 class Template(Element):
 
-    def __init__(self, content, channel=None):
+    def __init__(self, channel=None, children=None):
         html_attrs = {
             'is': 'urth-core-bind',
         }
@@ -22,7 +22,7 @@ class Template(Element):
                 channel = Channel(channel_name)
             html_attrs['channel'] = channel_name
         self.channel = channel
-        super().__init__('template', children=content, **html_attrs)
+        super().__init__('template', children=children, **html_attrs)
 
     def urth_imports(self):
         links = set()
