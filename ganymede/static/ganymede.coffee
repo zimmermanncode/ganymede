@@ -179,6 +179,7 @@ class Ganymede.ToolBar
     constructor: ->
         @$ = $('#maintoolbar').detach()
         @$.find('.btn:contains("CellToolbar")').hide()
+        @$.find('.btn span').hide()
 
     unload: ->
         $('.btn-group').css
