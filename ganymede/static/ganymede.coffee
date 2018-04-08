@@ -19,7 +19,7 @@
 
 
 class Ganymede
-    constructor: (logo_src) ->
+    constructor: (logoSrc) ->
         @metadata = window.IPython.notebook.metadata.ganymede ?= {}
 
         $('#header').hide()
@@ -33,29 +33,30 @@ class Ganymede
         @$.append @menubar.$
         @$.append @toolbar.$
 
-        @logo = new Ganymede.Logo logo_src
+        @logo = new Ganymede.Logo logoSrc
         @logo.$.addClass 'ui-resizable-handle ui-resizable-se'
         @$.append @logo.$
 
-        @metadata.height ?= @logo.$.outerHeight true
-        @metadata.width ?= @logo.$.outerWidth true
-        @$.height @metadata.height
-        @$.width @metadata.width
+        @$.height (@metadata.height ?= @logo.$.outerHeight true)
+        @$.width (@metadata.width ?= @logo.$.outerWidth true)
 
         @$.resizable
             handles:
                 se: @logo.$
+
             start: =>
                 @preventClick = false
                 @metadata.slim = false
                 @metadata.height = @$.height()
                 @metadata.width = @$.width()
+
             resize: =>
                 @resizing = true
                 @preventClick = true
                 @metadata.height = @$.height()
                 @metadata.width = @$.width()
                 @update()
+
             stop: =>
                 @resizing = false
                 @update()
@@ -93,12 +94,14 @@ class Ganymede
             @$.height @metadata.height - overHeight
         else if not @resizing
             @$.height @metadata.height
+
         overWidth = @metadata.width - @$.width() + (@$.outerWidth true) \
             - $(window).width()
         if overWidth > 0
             @$.width @metadata.width - overWidth
         else if not @resizing
             @$.width @metadata.width
+
         @horizontal = not (@vertical = @$.height() > @$.width())
 
         if @metadata.slim is true
@@ -204,17 +207,20 @@ class Ganymede.Console
                 left: @metadata.left
         else
             @metadata.left = @$.offset().left
+
         if @metadata.collapsed is true
             @$.addClass 'collapsed'
 
         @$.resizable
             handles: @$handles
+
             start: (event) =>
                 @preventClick = false
                 @metadata.height = @$.height()
                 @metadata.width = @$.width()
                 @mouseX = event.pageX
                 @offsetX = @$.offset().left
+
             resize: (event) =>
                 @resizing = true
                 @metadata.height = @$.height()
@@ -225,6 +231,7 @@ class Ganymede.Console
                         left: @metadata.left \
                             = @offsetX + event.pageX - @mouseX
                 @update()
+
             stop: =>
                 @resizing = false
                 @update()
@@ -240,8 +247,6 @@ class Ganymede.Console
             @update()
 
         $tab = $('.ganymede-console-tab').detach()
-        $('#ganymede-console-tabs').remove()
-        @$tabs = $("""<ul id="ganymede-console-tabs"></ul>""")
         if not $tab.length
             $tab = $("""
                 <li class="ganymede-console-tab">
@@ -253,6 +258,9 @@ class Ganymede.Console
             $('.kernel_indicator_name', $indicator).hide()
             $indicator.prepend $('#notebook_name')
             $indicator.prepend $('#kernel_logo_widget')
+
+        $('#ganymede-console-tabs').remove()
+        @$tabs = $("""<ul id="ganymede-console-tabs"></ul>""")
         @$tabs.append $tab
         @$.prepend @$tabs
         @$.tabs()
@@ -315,20 +323,23 @@ class Ganymede.Console
 
         $('.output_wrapper', @$).draggable
             handle: '.out_prompt_overlay'
+
             start: (event) =>
                 $output = $(event.target)
                 if not @$.hasClass 'collapsed'
                     @$.addClass 'collapsed ganymede-output-drag'
                 @update()
-                #HACK: keep current offset...
+
+                # HACK: keep current offset...
                 if not $output.hasClass 'ganymede'
                     offset = $output.offset()
                     data = $output.data('ui-draggable')
                     data.offset.click.top -= offset.top
                     data.offset.click.left -= offset.left
-                #... when switching to position: fixed
+                # ... when switching to position: fixed
                 $output.addClass 'ganymede'
                 $output.css 'z-index', -1
+
                 $outputs = $('.output_wrapper.ganymede').sort (l, r) ->
                     ($(l).css 'z-index') - ($(r).css 'z-index')
                 z = -2 - $outputs.length
@@ -339,18 +350,21 @@ class Ganymede.Console
                         ).output ?= {}
                     $(output).css
                         'z-index': metadata['z-index'] = z + index
+
                 metadata = ($output.parents('.cell')
                     .data('cell').metadata.ganymede ?= {}
                     ).output ?= {}
                 metadata.undocked = true
                 $output.css
                     'z-index': metadata['z-index'] = z + index
+
             stop: (event) =>
                 $output = $(event.target)
                 metadata = ($output.parents('.cell')
                     .data('cell').metadata.ganymede ?= {}
                     ).output ?= {}
                 $.extend metadata, $output.offset()
+
                 if @$.hasClass 'ganymede-output-drag'
                     @$.removeClass 'collapsed ganymede-output-drag'
                 if $output.hasClass 'ui-resizable'
