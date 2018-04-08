@@ -146,7 +146,10 @@ class Ganymede
 
 
 class Ganymede.Logo
+    @defaultSrc: "/nbextensions/ganymede/ganymede.svg"
+
     constructor: (src) ->
+        src ?= @constructor.defaultSrc
         $('#ganymede-logo').remove()
         @$ = $("""<img id="ganymede-logo" src="#{src}" />""")
 
