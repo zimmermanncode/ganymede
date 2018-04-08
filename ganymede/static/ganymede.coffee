@@ -26,6 +26,12 @@ class Ganymede
         @menubar = new Ganymede.MenuBar()
         @toolbar = new Ganymede.ToolBar()
 
+        $('#ganymede-style').remove()
+        $('body').append $("""
+            <link id="ganymede-style" rel="stylesheet"
+                  href="/nbextensions/ganymede/ganymede.css">
+            """)
+
         $('#ganymede').remove()
         @$ = $("""<div id="ganymede"></div>""")
         $('body').append @$
@@ -145,6 +151,7 @@ class Ganymede
         $(window).off 'resize.ganymede'
         @console.unload()
         @$.remove()
+        $('#ganymede-style').remove()
         @
 
 
