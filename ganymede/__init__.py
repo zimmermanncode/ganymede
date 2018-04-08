@@ -39,36 +39,24 @@ def load(shell=None, logo_src=None):
     # make sure that .static pkg gets reloaded on %reload_ext ganymede
     # to recompile ganymede.coffee in development (non-installed) mode
     sys.modules.pop('ganymede.static', None)
-    from ganymede.static import CSS, JS, TOUCH_PUNCH_JS, SVG
-
-    if logo_src is None:
-        # load Ganymede's default logo
-        logo_src = 'data:image/svg+xml;base64,%s' \
-            % b64encode(SVG.bytes()).decode('ascii')
+    from ganymede.static import TOUCH_PUNCH_JS
 
     # import locally to make this module importable in setup.py
     # without further dependencies
     from IPython.display import HTML
 
     return HTML(u"""
-        <style id="ganymede-style" type="text/css">
-            {style}
-        </style>
         <script type="text/javascript">
             {touch_punch}
         </script>
         <script type="text/javascript">
-            {script}
-            window.ganymede = new Ganymede({logo_src});
+            if (Ganymede.temple != null) {{
+                Ganymede.temple.unload();
+            }}
+            Ganymede.temple = new Ganymede({logo_src});
         </script>
-        <script type="text/javascript">
-            $('#ganymede-style').on('remove', function () {{
-                window.ganymede.unload();
-            }});
-        </script>
-    """.format(style=CSS.text('ascii'), script=JS.text('ascii'),
-               logo_src=json.dumps(logo_src),
-               touch_punch=TOUCH_PUNCH_JS.text('utf8')))
+    """.format(logo_src=logo_src if logo_src is not None else "",
+               touch_punch=TOUCH_PUNCH_JS.text('utf-8')))
 
 
 def load_ipython_extension(shell):
