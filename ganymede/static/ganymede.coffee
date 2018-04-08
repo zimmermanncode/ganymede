@@ -406,3 +406,25 @@ class Ganymede.Console
 
         $([window, '#notebook-container']).off 'resize.ganymede-console'
         @
+
+
+define [], =>
+    load_ipython_extension: ->
+        Jupyter.notebook.keyboard_manager.actions.register
+            help: "Enter Ganymede's Temple"
+            handler: ->
+                Ganymede.temple?.unload()
+                Ganymede.temple = new Ganymede
+
+            , "enter-hacking.moon.ganymede's-temple", 'ganymede'
+
+        Jupyter.toolbar.add_buttons_group [
+            action: "ganymede:enter-hacking.moon.ganymede's-temple"
+            # icon: 'fa-'
+            id: 'enter-ganymede'
+        ]
+        $button = $('#enter-ganymede')
+        $button.append $("""
+            <img height="#{$button.height()}"
+                 src="#{Ganymede.Logo.defaultSrc}">
+            """)
