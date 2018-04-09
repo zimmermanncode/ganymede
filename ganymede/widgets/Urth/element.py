@@ -9,8 +9,10 @@ CONTEXT_STACK = []
 
 class Element:
 
-    def __init__(self, tag, children=None, **html_attrs):
+    def __init__(self, tag, html_class=None, children=None, **html_attrs):
         self._element = lxml.html.Element(tag)
+        html_class = list(html_class) if html_class is not None else []
+        html_attrs.setdefault('class', ' '.join(html_class))
         # Element(tag, attrib=...) doesn't support None values,
         # but HtmlElement.set() does (for valueless HTML attributes)
         for key, value in html_attrs.items():

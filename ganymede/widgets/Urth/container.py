@@ -8,8 +8,8 @@ class Container(Element):
         html_class = list(html_class) if html_class is not None else []
         if 'container' not in html_class:
             html_class.insert(0, 'container')
-        html_attrs.setdefault('class', ' '.join(html_class))
-        super().__init__('div', children=children, **html_attrs)
+        super().__init__('div', html_class=html_class, children=children,
+                         **html_attrs)
 
     def urth_imports(self):
         links = set()

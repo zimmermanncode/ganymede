@@ -9,9 +9,10 @@ __all__ = ('Element', 'Import')
 
 class Component(Element):
 
-    def __init__(self, name, package_owner=None, version_spec=None,
+    def __init__(self, name, html_class=None,
+                 package_owner=None, version_spec=None,
                  **html_attrs):
-        super().__init__(name, **html_attrs)
+        super().__init__(name, html_class=html_class, **html_attrs)
         self.package_owner = package_owner
         self.version_spec = version_spec
 
