@@ -22,6 +22,7 @@ class Element:
 
     def __enter__(self):
         CONTEXT_STACK.append(self)
+        return self
 
     def __exit__(self, exc_type, exc, traceback):
         assert CONTEXT_STACK[-1] is self
