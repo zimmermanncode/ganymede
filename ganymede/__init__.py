@@ -108,8 +108,10 @@ def _jupyter_nbextension_paths():
         {
             'section': 'notebook',
             'src': list(explorer.__path__)[-1],
-            'dest': ('declarativewidgets/urth_components/'
-                     'declarativewidgets-explorer'),
+            'dest': (
+                'declarativewidgets/urth_components/'
+                'declarativewidgets-explorer'
+            ),
             'require': 'declarativewidgets/js/main',
         },
     ]
