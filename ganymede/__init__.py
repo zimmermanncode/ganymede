@@ -46,17 +46,18 @@ def load(shell=None, logo_src=None):
     from IPython.display import HTML
 
     return HTML(u"""
-        <script type="text/javascript">
-            {touch_punch}
-        </script>
-        <script type="text/javascript">
-            if (Ganymede.temple != null) {{
-                Ganymede.temple.unload();
-            }}
-            Ganymede.temple = new Ganymede({logo_src});
-        </script>
-    """.format(logo_src=logo_src if logo_src is not None else "",
-               touch_punch=TOUCH_PUNCH_JS.text('utf-8')))
+    <script type="text/javascript">
+        {touch_punch}
+    </script>
+    <script type="text/javascript">
+        if (Ganymede.temple != null) {{
+            Ganymede.temple.unload();
+        }}
+        Ganymede.temple = new Ganymede({logo_src});
+    </script>
+    """.format(
+        logo_src=(json.dumps(logo_src) if logo_src is not None else ""),
+        touch_punch=TOUCH_PUNCH_JS.text('utf-8')))
 
 
 def load_ipython_extension(shell):
