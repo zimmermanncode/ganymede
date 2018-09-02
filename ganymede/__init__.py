@@ -78,6 +78,35 @@ def load_ipython_extension(shell):
 
 
 def load_jupyter_server_extension(app):
+    from jupyter_core.paths import jupyter_path
+
+    for path in map(Path, jupyter_path('ganymede', 'declarativewidgets')):
+        if path.normpath().normcase().startswith(
+                Path(sys.prefix).normpath().normcase()):
+            break
+    else:
+        raise RuntimeError("no jupyter_path() under sys.prefix found")
+
+    (path / 'urth_components').makedirs_p()
+
+    from ganymede.static.urth_components import BOWER_DEPENDENCIES
+
+    (path / '.bowerrc').write_text(json.dumps({
+        'analytics': False,
+        'interactive': False,
+        'directory': 'urth_components',
+    }, indent=2))
+
+    (path / 'bower.json').write_text(json.dumps({
+        'name': 'jupyer-declarativewidgets',
+        'dependencies': BOWER_DEPENDENCIES,
+    }, indent=2))
+
+    import nodely.bin
+
+    with path:
+        nodely.bin.bower(['--allow-root', 'install'])
+
     from ganymede.widgets.ext import urth_import
 
     urth_import.load_jupyter_server_extension(app)

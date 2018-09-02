@@ -29,24 +29,29 @@ import json
 from path import Path
 
 from ganymede.widgets import DECLARATIVEWIDGETS_REPO
-from ganymede.static.urth_components import BOWER_DEPENDENCIES
+# from ganymede.static.urth_components import BOWER_DEPENDENCIES
 
 
 __path__.append(DECLARATIVEWIDGETS_REPO / 'nb-extension')
 
 
-_BOWERRC = __path__[-1] / '.bowerrc'
-
-_BOWERRC.write_text(json.dumps({
-    'analytics': False,
-    'interactive': False,
-    'directory': 'urth_components',
-}, indent=2))
+# urth_components/ formerly handled below have moved to server-only
+# jupyter_path('ganymede', 'declarativewidgets')
+# and initialization now happens in ganymede.load_jupyter_server_extension()
 
 
-BOWER_JSON = __path__[-1] / 'bower.json'
+# _BOWERRC = __path__[-1] / '.bowerrc'
 
-BOWER_JSON.write_text(json.dumps({
-    'name': 'jupyer-declarativewidgets',
-    'dependencies': BOWER_DEPENDENCIES,
-}, indent=2))
+# _BOWERRC.write_text(json.dumps({
+#     'analytics': False,
+#     'interactive': False,
+#     'directory': 'urth_components',
+# }, indent=2))
+
+
+# BOWER_JSON = __path__[-1] / 'bower.json'
+
+# BOWER_JSON.write_text(json.dumps({
+#     'name': 'jupyer-declarativewidgets',
+#     'dependencies': BOWER_DEPENDENCIES,
+# }, indent=2))
