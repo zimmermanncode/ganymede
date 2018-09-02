@@ -38,6 +38,8 @@ __path__.append(DECLARATIVEWIDGETS_REPO / 'nb-extension')
 _BOWERRC = __path__[-1] / '.bowerrc'
 
 _BOWERRC.write_text(json.dumps({
+    'analytics': False,
+    'interactive': False,
     'directory': 'urth_components',
 }, indent=2))
 
