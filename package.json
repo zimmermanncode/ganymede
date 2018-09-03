@@ -1,0 +1,19 @@
+{
+  "name": "ganymede",
+  "version": "0.2.0",
+  "description": "Hacking Jupyter's atmosphere since 2015",
+  "author": "Stefan Zimmermann <user@zimmermann.co>",
+  "license": "GPLv3",
+  "homepage": "https://github.com/zimmermanncode/ganymede",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zimmermanncode/ganymede"
+  },
+  "bugs": {
+    "url": "https://github.com/zimmermanncode/ganymede/issues"
+  },
+  "devDependencies": {
+    "bower": ">=1.8.4",
+    "coffee-script": ">=1.12.7"
+  }
+}
