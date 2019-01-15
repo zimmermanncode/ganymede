@@ -29,16 +29,6 @@ def init_declarativewidgets():
     Run _bower_ to resolve all dependencies of the _urth_ components and call
     ``declarativewidgets.init()``
     """
-    import nodely.bin
-
     import declarativewidgets
-
-    from .ext.urth_import import get_nbextension_path
-
-    ext_path = get_nbextension_path()
-
-    if ext_path is not None:
-        with Path(ext_path):
-            nodely.bin['bower'](['--allow-root', 'install'])
 
     declarativewidgets.init()
