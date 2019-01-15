@@ -21,6 +21,7 @@
 class Ganymede
     constructor: (logoSrc) ->
         @metadata = window.IPython.notebook.metadata.ganymede ?= {}
+        @metadata.active = true
 
         $('#header').hide()
         @menubar = new Ganymede.MenuBar()
@@ -152,6 +153,8 @@ class Ganymede
         @console.unload()
         @$.remove()
         $('#ganymede-style').remove()
+
+        @metadata.active = false
         @
 
 
@@ -409,13 +412,32 @@ class Ganymede.Console
         @
 
 
+Ganymede.enter = ->
+    $('#ganymede-loader-output').remove()
+    loaderCell = Jupyter.notebook.insert_cell_above(0)
+    loaderCell.element.hide()
+    loaderCell.set_text("%reload_ext ganymede")
+    loaderCell.execute()
+    $loaderOutput = loaderCell.element.find('.output_wrapper')
+    $('#notebook').before($loaderOutput)
+    $loaderOutput[0].id = 'ganymede-loader-output'
+    Jupyter.notebook.delete_cell(0)
+
+
+Ganymede.respawn = ->
+    if Jupyter.notebook.metadata.ganymede?.active
+        Ganymede.enter()
+
+
+Ganymede.respawn()
+
+
 define [], =>
     load_ipython_extension: ->
         Jupyter.notebook.keyboard_manager.actions.register
             help: "Enter Ganymede's Temple"
             handler: ->
-                Ganymede.temple?.unload()
-                Ganymede.temple = new Ganymede
+                Ganymede.enter()
 
             , "enter-hacking.moon.ganymede's-temple", 'ganymede'
 
