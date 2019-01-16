@@ -1,3 +1,4 @@
+from abc import ABCMeta
 from copy import copy
 
 from IPython.display import display, HTML
@@ -7,7 +8,7 @@ import lxml.html
 CONTEXT_STACK = []
 
 
-class Element:
+class Element(metaclass=ABCMeta):
 
     def __init__(self, tag, html_class=None, children=None, **html_attrs):
         self._element = lxml.html.Element(tag)
