@@ -13,13 +13,16 @@ from .element import Element
 from .channel import Channel
 from .container import Container, HBox, VBox
 from .component import Component, Import
+from .label import Label
 from .polymer import Polymer
 from .template import Template
+from .button import Button
 
-__all__ = ('Element', 'Channel', 'Container', 'HBox', 'VBox',
-           'Component', 'Import', 'Polymer', 'Template',
-           # from declarativewidgets
-           'Channels', 'channel')
+__all__ = (
+    'Element', 'Channel', 'Container', 'HBox', 'VBox',
+    'Component', 'Import', 'Polymer', 'Template', 'Button', 'Label',
+    # from declarativewidgets
+    'Channels', 'channel')
 
 
 # class component(object):
