@@ -37,6 +37,6 @@ class Template(Element):
         return {imp.bower_endpoint for imp in self.urth_imports()}
 
     def to_html(self):
-        return "{}\n{}".format(
+        return "{}\n\n{}".format(
             "\n".join(imp.to_html() for imp in self.urth_imports()),
             super().to_html())

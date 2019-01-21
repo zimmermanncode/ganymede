@@ -34,15 +34,18 @@ class Element(metaclass=ABCMeta):
             raise exc.with_traceback(traceback)
 
     def __eq__(self, other):
-        return (self._element.tag == other._element.tag and
-                self._element.attrib == other._element.attrib and
-                self._element.nsmap == other._element.nsmap and
-                self.children == other.children)
+        return (
+            self._element.tag == other._element.tag and
+            self._element.attrib == other._element.attrib and
+            self._element.nsmap == other._element.nsmap and
+            self.children == other.children)
 
     def __hash__(self):
-        return hash((self._element.tag, tuple(self._element.attrib.items()),
-                     tuple(self._element.nsmap.items()),
-                     tuple(self.children or ())))
+        return hash((
+            self._element.tag,
+            tuple(self._element.attrib.items()),
+            tuple(self._element.nsmap.items()),
+            tuple(self.children or ())))
 
     def _element_tree(self):
         root = copy(self._element)
@@ -61,8 +64,9 @@ class Element(metaclass=ABCMeta):
         self._element.text = value
 
     def to_html(self):
-        return lxml.html.tostring(self._element_tree(), encoding='unicode',
-                                  pretty_print=True)
+        return lxml.html.tostring(
+            self._element_tree(), encoding='unicode', pretty_print=True
+        ).strip()
 
     def print_html(self):
         print(self.to_html())
@@ -73,5 +77,6 @@ class Element(metaclass=ABCMeta):
     def __repr__(self):
         return "Urth.{} {}".format(
             type(self).__qualname__,
-            lxml.html.tostring(self._element_tree(), encoding='unicode',
-                               pretty_print=True))
+            lxml.html.tostring(
+                self._element_tree(), encoding='unicode', pretty_print=True
+            ).strip())

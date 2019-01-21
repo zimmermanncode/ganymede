@@ -8,8 +8,8 @@ class Container(Element):
         html_class = list(html_class) if html_class is not None else []
         if 'container' not in html_class:
             html_class.insert(0, 'container')
-        super().__init__('div', html_class=html_class, children=children,
-                         **html_attrs)
+        super().__init__(
+            'div', html_class=html_class, children=children, **html_attrs)
 
     def urth_imports(self):
         links = set()
@@ -24,7 +24,7 @@ class Container(Element):
         return {imp.bower_endpoint for imp in self.urth_imports()}
 
     def to_html(self):
-        return "{}\n{}".format(
+        return "{}\n\n{}".format(
             "\n".join(imp.to_html() for imp in self.urth_imports()),
             super().to_html())
 
@@ -32,12 +32,12 @@ class Container(Element):
 class HBox(Container):
 
     def __init__(self, children=None, **html_attrs):
-        super().__init__(html_class=['flex-horizontal'],
-                         children=children, **html_attrs)
+        super().__init__(
+            html_class=['flex-horizontal'], children=children, **html_attrs)
 
 
 class VBox(Container):
 
     def __init__(self, children=None, **html_attrs):
-        super().__init__(html_class=['flex-vertical'],
-                         children=children, **html_attrs)
+        super().__init__(
+            html_class=['flex-vertical'], children=children, **html_attrs)
