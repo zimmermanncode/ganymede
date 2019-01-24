@@ -1,27 +1,20 @@
-"""
-Pythonic API for Urth templates.
-"""
+"""Pythonic API for Urth templates."""
 
-from .channel import Channel
+from .channel import ChannelBindable
 from .component import Component
 from .container import Container
 from .element import Element
 
 
-class Template(Element):
+class Template(Element, ChannelBindable):
 
     def __init__(self, channel=None, children=None):
         html_attrs = {
             'is': 'urth-core-bind',
         }
-        if channel is not None:
-            if isinstance(channel, Channel):
-                channel_name = channel.name
-            else:
-                channel_name = channel
-                channel = Channel(channel_name)
-            html_attrs['channel'] = channel_name
-        self.channel = channel
+        ChannelBindable.__init__(self, channel)
+        if self.channel is not None:
+            html_attrs['channel'] = self.channel.name
         super().__init__('template', children=children, **html_attrs)
 
     def urth_imports(self):

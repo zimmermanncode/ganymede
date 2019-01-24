@@ -1,6 +1,4 @@
-"""
-Pythonic API for Urth channels.
-"""
+"""Pythonic API for Urth channels."""
 
 from collections import MutableMapping
 
@@ -9,6 +7,20 @@ from moretools import isdict
 import declarativewidgets
 
 from .element import Element
+
+
+CONTEXT_STACK = []
+
+
+class ChannelBindable:
+
+    def __init__(self, channel=None):
+        if channel is None:
+            if CONTEXT_STACK:
+                channel = CONTEXT_STACK[-1]
+        elif not isinstance(channel, Channel):
+            channel = Channel(channel)
+        self.channel = channel
 
 
 class Meta(type(Element)):
@@ -32,6 +44,16 @@ class Channel(Element, MutableMapping, metaclass=Meta):
     @property
     def name(self):
         return self._channel.chan
+
+    def __enter__(self):
+        CONTEXT_STACK.append(self)
+        return self
+
+    def __exit__(self, exc_type, exc, traceback):
+        assert CONTEXT_STACK[-1] is self
+        CONTEXT_STACK.pop(-1)
+        if exc is not None:
+            raise exc.with_traceback(traceback)
 
     def display(self):
         super().display()
