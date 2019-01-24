@@ -270,7 +270,8 @@
   border-right-width: 5px;
   border-bottom-width: 2px;
   border-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 20px;
   background-color: rgba(255, 255, 255, 0.6);
   box-shadow: 3px 3px 10px #777;
 }
@@ -291,14 +292,25 @@
 }
 
 .output_wrapper.ganymede .ui-resizable-se {
+    bottom: -7px;
+    right: -10px;
+    border-radius: 100%;
+    /*
     border-top-left-radius: 100%;
     border-bottom-right-radius: 1px;
     background-color: #ababab;
     box-shadow: 2px 2px 2px #777;
+    */
 }
 
 .cell:hover .output_wrapper.ganymede {
     border-color: #42A5F5;
+}
+
+.output_wrapper.ganymede .out_prompt_overlay {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 5px;
 }
 
 .out_prompt_overlay:hover,
@@ -312,4 +324,20 @@
 
 .cell:hover {
     background-color: #eee;
+}
+
+.ganymede-output-title {
+    position: absolute;
+    transform: rotate(270deg);
+    transform-origin: top left;
+    bottom: -19px;
+    left: 1px;
+    font-size: 18px;
+}
+
+.ganymede-output-title span{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    background-color: #333;
 }

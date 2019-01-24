@@ -317,6 +317,14 @@ class Ganymede.Console
             if metadata.undocked is true
                 $output = $('.output_wrapper', cell)
                 $output.addClass 'ganymede'
+                if metadata.title
+                    $sidebar = $('.out_prompt_overlay', $output)
+                    $('.ganymede-output-title', $sidebar).remove()
+                    $sidebar.append($("""
+                    <div class="ganymede-output-title">
+                        <span class="label">#{metadata.title}</span>
+                    </div
+                    """))
                 if $output.hasClass 'ui-resizable'
                     $output.resizable 'enable'
                 else
