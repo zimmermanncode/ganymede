@@ -1,8 +1,9 @@
 from abc import ABCMeta
 from copy import copy
 
-from IPython.display import display, HTML
 import lxml.html
+from IPython.display import display, HTML
+from moretools import dictitems, isdict
 
 
 CONTEXT_STACK = []
@@ -10,15 +11,25 @@ CONTEXT_STACK = []
 
 class Element(metaclass=ABCMeta):
 
-    def __init__(self, tag, html_class=None, children=None, **html_attrs):
+    def __init__(
+            self, tag, html_class=None, style=None, children=None,
+            **html_attrs):
         self._element = lxml.html.Element(tag)
         html_class = list(html_class) if html_class is not None else []
         html_attrs.setdefault('class', ' '.join(html_class))
+
+        if style is not None:
+            if isdict(style):
+                style = "; ".join(
+                    "{}: {}".format(*item) for item in dictitems(style))
+            html_attrs['style'] = style
+
         # Element(tag, attrib=...) doesn't support None values,
         # but HtmlElement.set() does (for valueless HTML attributes)
         for key, value in html_attrs.items():
             self._element.set(key, value)
         self.children = list(children) if children is not None else []
+
         # are we inside a `with` context of another Element?
         if CONTEXT_STACK:
             CONTEXT_STACK[-1].children.append(self)
