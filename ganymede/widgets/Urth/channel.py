@@ -61,6 +61,17 @@ class Channel(Element, MutableMapping, metaclass=Meta):
             self[key] = value
 
     def changed(self, key, _func=None):
+        # TODO: generalize (duplicated in __setitem__)
+        if key not in self._handlers:
+            self._handlers[key] = []
+
+            def watcher(old_value, new_value):
+                self._items[key] = new_value
+                for func in self._handlers[key]:
+                    func(new_value, old_value)
+
+            self._channel.watch(key, watcher)
+
         def deco(func):
             self._handlers[key].append(func)
             if key in self._items:
