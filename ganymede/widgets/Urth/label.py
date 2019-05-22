@@ -13,9 +13,10 @@ class Label(Polymer.Component):
             **html_attrs):
 
         super().__init__('iron-label', html_class=html_class, **html_attrs)
-        html_span_class = (
-            list(html_span_class) if not isstring(html_span_class) else
-            html_span_class.split() if html_span_class is not None else [])
+        html_span_class = ((
+            list(html_span_class) if not isstring(html_span_class)
+            else html_span_class.split()
+        ) if html_span_class is not None else [])
 
         with self:
             span = Element('span', html_class=['label'] + html_span_class)
