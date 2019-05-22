@@ -1,6 +1,4 @@
-"""
-Pythonic API for WebComponents.
-"""
+"""Pythonic API for WebComponents."""
 
 from .element import Element
 
@@ -10,10 +8,10 @@ __all__ = ('Element', 'Import')
 class Component(Element):
 
     def __init__(
-            self, name, html_class=None,
+            self, tag, html_class=None,
             package_owner=None, version_spec=None,
             **html_attrs):
-        super().__init__(name, html_class=html_class, **html_attrs)
+        super().__init__(tag, html_class=html_class, **html_attrs)
         self.package_owner = package_owner
         self.version_spec = version_spec
 
@@ -40,8 +38,8 @@ class Component(Element):
 
 class Import(Element):
 
-    def __init__(self, name, package_owner=None, version_spec=None):
-        package = name
+    def __init__(self, tag, package_owner=None, version_spec=None):
+        package = tag
         if package_owner is not None:
             package = '/'.join((package_owner, package))
         if version_spec is not None:
@@ -50,7 +48,7 @@ class Import(Element):
             'rel': 'import',
             'is': 'urth-core-import',
             'package': package,
-            'href': 'urth_components/{name}/{name}.html'.format(name=name),
+            'href': 'urth_components/{name}/{name}.html'.format(name=tag),
         })
 
     @property
