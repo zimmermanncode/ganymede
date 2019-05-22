@@ -14,13 +14,14 @@ CONTEXT_STACK = []
 
 class ChannelBindable:
 
-    def __init__(self, channel=None):
+    def __init__(self, channel=None, key=None):
         if channel is None:
             if CONTEXT_STACK:
                 channel = CONTEXT_STACK[-1]
         elif not isinstance(channel, Channel):
             channel = Channel(channel)
         self.channel = channel
+        self.channel_key = key
 
 
 class Meta(type(Element)):
