@@ -9,17 +9,18 @@
 
 from declarativewidgets import Channels, channel
 
-from .element import Element
+from .button import Button
 from .channel import Channel
 from .container import Container, HBox, VBox
 from .component import Component, Import
+from .element import Element
 from .label import Label
 from .polymer import Polymer
 from .template import Template
-from .button import Button
+from .toggle import ToggleButton
 
 __all__ = (
-    'Element', 'Channel', 'Container', 'HBox', 'VBox',
+    'Element', 'Channel', 'Container', 'HBox', 'VBox', 'ToggleButton',
     'Component', 'Import', 'Polymer', 'Template', 'Button', 'Label',
     # from declarativewidgets
     'Channels', 'channel')

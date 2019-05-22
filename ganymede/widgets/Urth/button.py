@@ -17,7 +17,8 @@ class Button(Polymer.Component, ChannelBindable, metaclass=Meta):
             self, text=None, channel=None, channel_key=None,
             html_class=None, **html_attrs):
 
-        super().__init__('paper-button', html_class=html_class, **html_attrs)
+        super().__init__(
+            'paper-button', html_class=html_class, **html_attrs)
         ChannelBindable.__init__(self, channel)
         if text is not None:
             self.text = text
