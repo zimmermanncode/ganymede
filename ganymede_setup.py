@@ -101,6 +101,6 @@ PACKAGE_DATA = {
 
 def setup_package_keywords(dist):
     for data in (dist, dist.metadata):
-        data.packages = list(set(data.packages).union(PACKAGES))
+        data.packages.extend(set(PACKAGES).difference(data.packages))
         data.package_dir = PACKAGE_DIRS
         data.package_data = PACKAGE_DATA
