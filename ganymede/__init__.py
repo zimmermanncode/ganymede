@@ -116,12 +116,13 @@ def load_jupyter_server_extension(app):
 
 
 def _jupyter_nbextension_paths():
+    import ganymede_static
     from ganymede_static import urth, urth_components, explorer
 
     return [
         {
             'section': 'notebook',
-            'src': 'static',
+            'src': Path(ganymede_static.__file__).realpath().dirname(),
             'dest': 'ganymede',
             'require': 'ganymede/ganymede',
         },
