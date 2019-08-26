@@ -24,7 +24,7 @@ import json
 import zetup
 from path import Path
 
-zetup.toplevel(__name__, ['load'])
+zetup.toplevel(__name__, ['load'], check_packages=False)
 
 
 def load(shell=None, logo_src=None):
