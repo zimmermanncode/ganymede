@@ -24,7 +24,7 @@ Setup proxy to ``urth.widgets.ext``.
 ``ganymede-declarativewidgets/nb-extension/python/urth/widgets/ext``
 """
 
-from ganymede.widgets import DECLARATIVEWIDGETS_REPO
+from ganymede_widgets import DECLARATIVEWIDGETS_REPO
 
 
 __path__.append(DECLARATIVEWIDGETS_REPO / 'nb-extension' / 'python' /

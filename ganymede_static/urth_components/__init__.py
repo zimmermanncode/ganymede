@@ -28,7 +28,7 @@ import json
 
 from path import Path
 
-from ganymede.widgets import DECLARATIVEWIDGETS_REPO
+from ganymede_widgets import DECLARATIVEWIDGETS_REPO
 from ganymede_static import explorer
 
 

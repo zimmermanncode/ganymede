@@ -73,9 +73,9 @@ def load_ipython_extension(shell):
     # without further dependencies
     from IPython.display import display
 
-    import ganymede.widgets
+    import ganymede_widgets
 
-    ganymede.widgets.init_declarativewidgets()
+    ganymede_widgets.init_declarativewidgets()
 
     display(load(shell))
 
@@ -110,7 +110,7 @@ def load_jupyter_server_extension(app):
     with path:
         nodely.bin['bower']('--allow-root', 'install')
 
-    from ganymede.widgets.ext import urth_import
+    from ganymede_widgets.ext import urth_import
 
     urth_import.load_jupyter_server_extension(app)
 

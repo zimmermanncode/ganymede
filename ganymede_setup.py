@@ -35,8 +35,8 @@ DECLARATIVEWIDGETS_EXPLORER_ROOT = os.path.join(
 
 PACKAGES = [
     'ganymede',
-    'ganymede.widgets',
     'ganymede_static',
+    'ganymede_widgets',
 ]
 
 
@@ -52,9 +52,9 @@ PACKAGE_DIRS = {
     for pkg in ['declarativewidgets', 'urth']}
 
 
-PACKAGES.append('ganymede.widgets.ext')
+PACKAGES.append('ganymede_widgets.ext')
 
-PACKAGE_DIRS['ganymede.widgets.ext'] = os.path.relpath(
+PACKAGE_DIRS['ganymede_widgets.ext'] = os.path.relpath(
     os.path.join(
         DECLARATIVEWIDGETS_ROOT, 'nb-extension', 'python',
         'urth', 'widgets', 'ext'),

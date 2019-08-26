@@ -24,7 +24,7 @@ Setup proxy to ``ganymede-declarativewidgets_explorer``.
 is used by ``.urth_components`` to extend its ``BOWER_DEPENDENCIES``
 """
 
-from ganymede.widgets import DECLARATIVEWIDGETS_EXPLORER_REPO
+from ganymede_widgets import DECLARATIVEWIDGETS_EXPLORER_REPO
 
 
 __path__.append(DECLARATIVEWIDGETS_EXPLORER_REPO)
