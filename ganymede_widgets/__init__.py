@@ -6,11 +6,9 @@ import sys
 
 from path import Path
 
-import ganymede
-
 
 DECLARATIVEWIDGETS_REPO = (
-    Path(ganymede.__file__).realpath().dirname().dirname() /
+    Path(__file__).realpath().dirname().dirname() /
     'ganymede-declarativewidgets')
 
 if DECLARATIVEWIDGETS_REPO.exists():
