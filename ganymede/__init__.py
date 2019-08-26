@@ -41,8 +41,8 @@ def load(shell=None, logo_src=None):
     """
     # make sure that .static pkg gets reloaded on %reload_ext ganymede
     # to recompile ganymede.coffee in development (non-installed) mode
-    sys.modules.pop('ganymede.static', None)
-    from ganymede.static import TOUCH_PUNCH_JS
+    sys.modules.pop('ganymede_static', None)
+    from ganymede_static import TOUCH_PUNCH_JS
 
     # import locally to make this module importable in setup.py
     # without further dependencies
@@ -92,7 +92,7 @@ def load_jupyter_server_extension(app):
 
     (path / 'urth_components').makedirs_p()
 
-    from ganymede.static.urth_components import BOWER_DEPENDENCIES
+    from ganymede_static.urth_components import BOWER_DEPENDENCIES
 
     (path / '.bowerrc').write_text(json.dumps({
         'analytics': False,
@@ -116,7 +116,7 @@ def load_jupyter_server_extension(app):
 
 
 def _jupyter_nbextension_paths():
-    from ganymede.static import urth, urth_components, explorer
+    from ganymede_static import urth, urth_components, explorer
 
     return [
         {

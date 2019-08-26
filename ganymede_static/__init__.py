@@ -20,7 +20,7 @@
 from path import Path
 
 
-DIR = Path(__file__).dirname()
+DIR = Path(__file__).realpath().dirname()
 
 SVG = DIR / 'ganymede.svg'
 

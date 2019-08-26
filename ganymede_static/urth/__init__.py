@@ -29,7 +29,7 @@ import json
 from path import Path
 
 from ganymede.widgets import DECLARATIVEWIDGETS_REPO
-# from ganymede.static.urth_components import BOWER_DEPENDENCIES
+# from ganymede_static.urth_components import BOWER_DEPENDENCIES
 
 
 __path__.append(DECLARATIVEWIDGETS_REPO / 'nb-extension')

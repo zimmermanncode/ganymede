@@ -19,14 +19,14 @@ if os.path.exists(os.path.join(
     # get_version(local_scheme=lambda _: '',
     #             write_to='ganymede/__version__.py')
 
-    import ganymede.static
+    import ganymede_static
 
 
 DECLARATIVEWIDGETS_ROOT = os.path.join(ROOT, 'ganymede-declarativewidgets')
 
 if os.path.exists(DECLARATIVEWIDGETS_ROOT):
     # ==> trigger bower.json creation
-    import ganymede.static.urth
+    import ganymede_static.urth
 
 
 DECLARATIVEWIDGETS_EXPLORER_ROOT = os.path.join(
@@ -35,8 +35,8 @@ DECLARATIVEWIDGETS_EXPLORER_ROOT = os.path.join(
 
 PACKAGES = [
     'ganymede',
-    'ganymede.static',
     'ganymede.widgets',
+    'ganymede_static',
 ]
 
 
@@ -62,14 +62,14 @@ PACKAGE_DIRS['ganymede.widgets.ext'] = os.path.relpath(
 
 
 STATIC_URTH = {
-    'ganymede.static.' + subpkg: os.path.relpath(
+    'ganymede_static.' + subpkg: os.path.relpath(
         os.path.join(DECLARATIVEWIDGETS_ROOT, dirname),
         ROOT)
     for subpkg, dirname in [
         ('urth',  'nb-extension'),
         ('urth_components', 'elements'),
     ]}
-STATIC_URTH['ganymede.static.explorer'] = DECLARATIVEWIDGETS_EXPLORER_ROOT
+STATIC_URTH['ganymede_static.explorer'] = DECLARATIVEWIDGETS_EXPLORER_ROOT
 
 PACKAGES.extend(STATIC_URTH)
 
@@ -96,11 +96,11 @@ PACKAGE_DATA = {
     pkg: find_package_data(
         PACKAGE_DIRS.get(pkg, pkg.replace('.', os.path.sep)),
         '.*rc', '*.css', '*.html', '*.js', '*.json', '*.png', '*.svg')
-    for pkg in ['ganymede.static'] + list(STATIC_URTH)}
+    for pkg in ['ganymede_static'] + list(STATIC_URTH)}
 
 
 def setup_package_keywords(dist):
     for data in (dist, dist.metadata):
-        data.packages = PACKAGES
+        data.packages = list(set(data.packages).union(PACKAGES))
         data.package_dir = PACKAGE_DIRS
         data.package_data = PACKAGE_DATA

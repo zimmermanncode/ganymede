@@ -29,7 +29,7 @@ import json
 from path import Path
 
 from ganymede.widgets import DECLARATIVEWIDGETS_REPO
-from ganymede.static import explorer
+from ganymede_static import explorer
 
 
 __path__.append(DECLARATIVEWIDGETS_REPO / 'elements')
