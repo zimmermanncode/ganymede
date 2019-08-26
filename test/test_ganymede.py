@@ -2,14 +2,14 @@ from path import Path
 from IPython.display import HTML
 
 import ganymede
+import ganymede_static
 
 
 def test_ganymede():
     """Test internal functionality of the ganymede python package.
     """
     COFFEE, JS = [
-      Path(ganymede.__file__).realpath().dirname()
-      / 'static' / 'ganymede' + ext
+      Path(ganymede_static.__file__).realpath().dirname() / 'ganymede' + ext
       for ext in ['.coffee', '.js']]
     if COFFEE.exists():
         # make sure that no javascript exists
