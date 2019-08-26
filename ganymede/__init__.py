@@ -105,7 +105,7 @@ def load_jupyter_server_extension(app):
     import nodely.bin
 
     with path:
-        nodely.bin['bower'](['--allow-root', 'install'])
+        nodely.bin['bower']('--allow-root', 'install')
 
     from ganymede.widgets.ext import urth_import
 
