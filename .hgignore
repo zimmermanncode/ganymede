@@ -9,13 +9,17 @@
 \.egg-info/
 ^dist/
 ^node_modules/
-^\.tox/
 
 ganymede/static/ganymede.js
 ^\.ipynb
+^\.metals/
 
 ^ganymede-declarativewidgets/
 ^ganymede-declarativewidgets_explorer/
 
 ^\.idea/
 ^cmake-
+
+^\.coverage
+^\.pytest
+^\.tox/
