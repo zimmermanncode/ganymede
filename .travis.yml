@@ -21,11 +21,13 @@ install:
 
 script:
   - python -m pytest -vv --doctest-modules ganymede test --cov ganymede --cov test --cov-report term-missing
-  - python -m robot test
   - python -m tox -r -v
 
+  - python -m pip uninstall --yes ganymede
   - python -m pip install zetup[all]
   - python -m zetup install
+  - python -m robot test
+
   # - python -m zetup pytest
   - python -m zetup sdist
   - python -m zetup tox
