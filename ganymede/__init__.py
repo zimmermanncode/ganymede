@@ -21,20 +21,23 @@ import sys
 from base64 import b64encode
 import json
 
+import zetup
 from path import Path
 
-from .__version__ import version as __version__
+zetup.toplevel(__name__, ['load'])
 
 
 def load(shell=None, logo_src=None):
     """
-    Generate and return Ganymede HTML containing CSS and JavaScript
-    for modifying the Jupyter notebook web interface,
-    wrapped in a ``IPython.display.HTML`` object:
+    Generate and return Ganymede HTML containing CSS and JavaScript.
 
-    * Must be called with IPython `shell` instance as first argument.
-    * Optionally takes a custom `logo_src` value for the ``src=`` attribute
-      of Ganymede's HTML logo ``<img>`` element.
+    For modifying the Jupyter notebook web interface, wrapped in an
+    ``IPython.display.HTML`` object
+
+    Must be called with IPython `shell` instance as first argument
+
+    Optionally takes a custom `logo_src` value for the ``src=`` attribute of
+    Ganymede's HTML logo ``<img>`` element
     """
     # make sure that .static pkg gets reloaded on %reload_ext ganymede
     # to recompile ganymede.coffee in development (non-installed) mode

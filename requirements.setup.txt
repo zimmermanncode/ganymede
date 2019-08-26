@@ -1,2 +1,4 @@
-path.py >= 10.3
-setuptools_scm >= 1.15
+#py2 path.py ~= 11.5.0 #import path
+#py3 path.py >= 11.5.0 #import path
+nodely >= 0.4.0
+zetup >= 0.2.64
