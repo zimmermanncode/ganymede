@@ -10,7 +10,7 @@ class ToggleButton(Polymer.Component, ChannelBindable):
         self, text=None, channel=None, channel_key=None, interval=None,
         html_class=None, **html_attrs):
 
-        super().__init__(
+        super(ToggleButton, self).__init__(
             'paper-toggle-button', html_class=html_class, **html_attrs)
         ChannelBindable.__init__(self, channel, key=channel_key)
 

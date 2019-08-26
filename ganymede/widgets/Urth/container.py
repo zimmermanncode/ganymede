@@ -8,7 +8,7 @@ class Container(Element):
         html_class = list(html_class) if html_class is not None else []
         if 'container' not in html_class:
             html_class.insert(0, 'container')
-        super().__init__(
+        super(Container, self).__init__(
             'div', html_class=html_class, children=children, **html_attrs)
 
     def urth_imports(self):
@@ -26,18 +26,18 @@ class Container(Element):
     def to_html(self):
         return "{}\n\n{}".format(
             "\n".join(imp.to_html() for imp in self.urth_imports()),
-            super().to_html())
+            super(Container, self).to_html())
 
 
 class HBox(Container):
 
     def __init__(self, children=None, **html_attrs):
-        super().__init__(
+        super(HBox, self).__init__(
             html_class=['flex-horizontal'], children=children, **html_attrs)
 
 
 class VBox(Container):
 
     def __init__(self, children=None, **html_attrs):
-        super().__init__(
+        super(VBox, self).__init__(
             html_class=['flex-vertical'], children=children, **html_attrs)

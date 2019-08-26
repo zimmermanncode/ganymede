@@ -12,7 +12,7 @@ class Label(Polymer.Component):
             self, text=None, html_class=None, html_span_class=None,
             **html_attrs):
 
-        super().__init__('iron-label', html_class=html_class, **html_attrs)
+        super(Label, self).__init__('iron-label', html_class=html_class, **html_attrs)
         html_span_class = ((
             list(html_span_class) if not isstring(html_span_class)
             else html_span_class.split()

@@ -2,14 +2,20 @@ from abc import ABCMeta
 from copy import copy
 
 import lxml.html
+import zetup
 from IPython.display import display, HTML
-from moretools import dictitems, isdict
+from moretools import dictitems, isdict, qualname
+from six import with_metaclass
 
 
 CONTEXT_STACK = []
 
 
-class Element(metaclass=ABCMeta):
+class Meta(ABCMeta, zetup.meta):
+    pass
+
+
+class Element(with_metaclass(Meta, zetup.object)):
 
     def __init__(
             self, tag, html_class=None, style=None, children=None,
@@ -87,7 +93,7 @@ class Element(metaclass=ABCMeta):
 
     def __repr__(self):
         return "Urth.{} {}".format(
-            type(self).__qualname__,
+            qualname(type(self)),
             lxml.html.tostring(
                 self._element_tree(), encoding='unicode', pretty_print=True
             ).strip())

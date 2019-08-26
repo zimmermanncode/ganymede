@@ -1,5 +1,7 @@
 """Pythonic API for Polymer buttons."""
 
+from six import with_metaclass
+
 from .channel import ChannelBindable
 from .polymer import Polymer
 
@@ -11,13 +13,13 @@ class Meta(type(Polymer.Component), type(ChannelBindable)):
         return cls(text, html_class=html_class, **html_attrs)
 
 
-class Button(Polymer.Component, ChannelBindable, metaclass=Meta):
+class Button(with_metaclass(Meta, Polymer.Component, ChannelBindable)):
 
     def __init__(
             self, text=None, channel=None, channel_key=None,
             html_class=None, **html_attrs):
 
-        super().__init__(
+        super(Button, self).__init__(
             'paper-button', html_class=html_class, **html_attrs)
         ChannelBindable.__init__(self, channel)
         if text is not None:

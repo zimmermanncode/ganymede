@@ -11,13 +11,14 @@ class Component(Element):
             self, tag, html_class=None,
             package_owner=None, version_spec=None,
             **html_attrs):
-        super().__init__(tag, html_class=html_class, **html_attrs)
+        super(Component, self).__init__(
+            tag, html_class=html_class, **html_attrs)
         self.package_owner = package_owner
         self.version_spec = version_spec
 
     def __eq__(self, other):
         return (
-            super().__eq__(other) and
+            super(Component, self).__eq__(other) and
             self.package_owner == other.package_owner and
             self.version_spec == other.version_spec)
 
@@ -33,7 +34,7 @@ class Component(Element):
 
     def to_html(self):
         return "{}\n\n{}".format(
-            self.urth_import.to_html(), super().to_html())
+            self.urth_import.to_html(), super(Component, self).to_html())
 
 
 class Import(Element):
@@ -44,7 +45,7 @@ class Import(Element):
             package = '/'.join((package_owner, package))
         if version_spec is not None:
             package = '#'.join((package, version_spec))
-        super().__init__('link', **{
+        super(Import, self).__init__('link', **{
             'rel': 'import',
             'is': 'urth-core-import',
             'package': package,

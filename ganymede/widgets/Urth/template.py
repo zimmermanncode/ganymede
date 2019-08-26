@@ -15,7 +15,8 @@ class Template(Element, ChannelBindable):
         ChannelBindable.__init__(self, channel)
         if self.channel is not None:
             html_attrs['channel'] = self.channel.name
-        super().__init__('template', children=children, **html_attrs)
+        super(Template, self).__init__(
+            'template', children=children, **html_attrs)
 
     def urth_imports(self):
         links = set()
@@ -32,4 +33,4 @@ class Template(Element, ChannelBindable):
     def to_html(self):
         return "{}\n\n{}".format(
             "\n".join(imp.to_html() for imp in self.urth_imports()),
-            super().to_html())
+            super(Template, self).to_html())

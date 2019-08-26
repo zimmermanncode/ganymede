@@ -2,7 +2,9 @@
 
 from collections import MutableMapping
 
+import zetup
 from moretools import isdict
+from six import with_metaclass
 
 import declarativewidgets
 
@@ -12,7 +14,7 @@ from .element import Element
 CONTEXT_STACK = []
 
 
-class ChannelBindable:
+class ChannelBindable(zetup.object):
 
     def __init__(self, channel=None, key=None):
         if channel is None:
@@ -28,7 +30,7 @@ class Meta(type(Element)):
     pass
 
 
-class Channel(Element, MutableMapping, metaclass=Meta):
+class Channel(with_metaclass(Meta, Element, MutableMapping)):
 
     def __init__(self, name, items=None, **html_attrs):
         html_attrs.setdefault('name', name)
@@ -37,7 +39,7 @@ class Channel(Element, MutableMapping, metaclass=Meta):
             self._items = {}
         else:
             self._items = dict(items)
-        super().__init__(
+        super(Channel, self).__init__(
             'urth-core-channel', children=children, **html_attrs)
         self._channel = declarativewidgets.channel(name)
         self._handlers = {}
@@ -57,7 +59,7 @@ class Channel(Element, MutableMapping, metaclass=Meta):
             raise exc.with_traceback(traceback)
 
     def display(self):
-        super().display()
+        super(Channel, self).display()
         for key, value in self._items.items():
             self[key] = value
 
@@ -107,7 +109,7 @@ class Channel(Element, MutableMapping, metaclass=Meta):
             "Cannot delete items of a {}".format(type(self)))
 
     def __iter__(self):
-        yield from self._items.items()
+        return iter(self._items.items())
 
     def __len__(self):
         return len(self._items)
@@ -116,7 +118,7 @@ class Channel(Element, MutableMapping, metaclass=Meta):
 class Item(Element):
 
     def __init__(self, key, value):
-        super().__init__(
+        super(Item, self).__init__(
             'urth-core-channel-item', key=key, value=str(value))
 
 

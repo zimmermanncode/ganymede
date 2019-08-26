@@ -1,4 +1,5 @@
-from glob import glob
+from fnmatch import fnmatch
+# from glob import glob
 import os
 import sys
 
@@ -79,11 +80,15 @@ def find_package_data(pkgdir, *patterns):
     Recursively find files matching any of given `patterns` under `pkgdir`.
 
     :return:
-       A list of all matching data file paths relative to given package dir
+        A list of all matching data file paths relative to given package dir
     """
-    return [os.path.relpath(path, pkgdir) for pattern in patterns
-            for path in glob(os.path.join(pkgdir, '**', pattern),
-                             recursive=True)]
+    return [
+        # os.path.relpath(path, pkgdir) for pattern in patterns
+        os.path.relpath(os.path.join(dirname, f), pkgdir)
+        for dirname, _, filenames in os.walk(pkgdir)
+        for f in filenames if any(fnmatch(f, p) for p in patterns)]
+        # for path in glob(os.path.join(pkgdir, '**', pattern),
+        #                  recursive=True)]
 
 
 PACKAGE_DATA = {
@@ -124,6 +129,8 @@ setup(
         'License :: OSI Approved :: GNU General Public License (GPL)',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
