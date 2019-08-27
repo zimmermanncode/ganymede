@@ -24,21 +24,26 @@ Setup proxy to ``ganymede-declarativewidgets/elements``.
 collected from all contained ``urth-*`` components
 """
 
-import json
+# import json
 
-from path import Path
+# from path import Path
 
 from ganymede_widgets import DECLARATIVEWIDGETS_REPO
-from ganymede_static import explorer
+# from ganymede_static import explorer
 
 
 __path__.append(DECLARATIVEWIDGETS_REPO / 'elements')
 
 
-BOWER_DEPENDENCIES = dict({
-    dep for urth_path in list(__path__[-1].dirs()) + [explorer.__path__[-1]]
-    for dep in (json.loads((urth_path / 'bower.json').text())
-                .get('dependencies', {}).items())})
+# urth_components/ formerly handled below have moved to server-only
+# jupyter_path('ganymede', 'declarativewidgets')
+# and initialization now happens in ganymede.load_jupyter_server_extension()
 
-# restrict polymer to <1.6 for urth-core-bind compatibility
-BOWER_DEPENDENCIES['polymer'] += " <1.6"
+
+# BOWER_DEPENDENCIES = dict({
+#     dep for urth_path in list(__path__[-1].dirs()) + [explorer.__path__[-1]]
+#     for dep in (json.loads((urth_path / 'bower.json').text())
+#                 .get('dependencies', {}).items())})
+
+# # restrict polymer to <1.6 for urth-core-bind compatibility
+# BOWER_DEPENDENCIES['polymer'] += " <1.6"

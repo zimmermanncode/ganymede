@@ -24,9 +24,9 @@ Setup proxy to ``ganymede-declarativewidgets/nb-extension``.
 there, which contains all dependencies from all ``urth-*`` components
 """
 
-import json
+# import json
 
-from path import Path
+# from path import Path
 
 from ganymede_widgets import DECLARATIVEWIDGETS_REPO
 # from ganymede_static.urth_components import BOWER_DEPENDENCIES

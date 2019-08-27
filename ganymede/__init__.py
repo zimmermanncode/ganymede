@@ -17,9 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with ganymede. If not, see <http://www.gnu.org/licenses/>.
 
+import json
 import sys
 from base64 import b64encode
-import json
+from itertools import chain
 
 import zetup
 from path import Path
@@ -87,12 +88,24 @@ def load_jupyter_server_extension(app):
         if path.normpath().normcase().startswith(
                 Path(sys.prefix).normpath().normcase()):
             break
+
     else:
         raise RuntimeError("no jupyter_path() under sys.prefix found")
 
     (path / 'urth_components').makedirs_p()
 
-    from ganymede_static.urth_components import BOWER_DEPENDENCIES
+    from ganymede_static import explorer, urth_components
+
+    bower_dependencies = dict({
+        dep for urth_path in chain(
+            Path(urth_components.__path__[-1]).dirs(), (
+                Path(explorer.__path__[-1]), ))
+
+        for dep in (json.loads((urth_path / 'bower.json').text())
+                    .get('dependencies', {}).items())})
+
+    # restrict polymer to <1.6 for urth-core-bind compatibility
+    bower_dependencies['polymer'] += " <1.6"
 
     (path / '.bowerrc').write_text(json.dumps({
         'analytics': False,
@@ -102,7 +115,7 @@ def load_jupyter_server_extension(app):
 
     (path / 'bower.json').write_text(json.dumps({
         'name': 'jupyer-declarativewidgets',
-        'dependencies': BOWER_DEPENDENCIES,
+        'dependencies': bower_dependencies,
     }, indent=2))
 
     import nodely.bin
