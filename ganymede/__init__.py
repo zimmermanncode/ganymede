@@ -22,8 +22,8 @@ import sys
 from base64 import b64encode
 from itertools import chain
 
-import zetup
 import morepy
+import zetup
 from path import Path
 
 zetup.toplevel(__name__, ['load'], check_packages=False)
