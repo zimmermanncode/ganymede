@@ -23,6 +23,7 @@ from base64 import b64encode
 from itertools import chain
 
 import zetup
+import morepy
 from path import Path
 
 zetup.toplevel(__name__, ['load'], check_packages=False)
@@ -40,6 +41,9 @@ def load(shell=None, logo_src=None):
     Optionally takes a custom `logo_src` value for the ``src=`` attribute of
     Ganymede's HTML logo ``<img>`` element
     """
+    if shell is not None:
+        morepy.load(shell)
+
     # make sure that .static pkg gets reloaded on %reload_ext ganymede
     # to recompile ganymede.coffee in development (non-installed) mode
     sys.modules.pop('ganymede_static', None)
