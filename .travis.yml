@@ -2,6 +2,11 @@ sudo: false
 git:
   depth: false
 
+addons:
+  apt:
+    packages:
+      - lynx
+
 language: python
 python:
   - '2.7'
@@ -22,6 +27,7 @@ install:
 script:
   - python -m pytest -vv --doctest-modules ganymede test --cov ganymede --cov test --cov-report term-missing
   - python -m tox -r -v
+  - lynx -dump /home/travis/build/zimmermanncode/ganymede/test/log.html
 
   - python -m pip uninstall --yes ganymede
   - python -m pip install zetup[all]
