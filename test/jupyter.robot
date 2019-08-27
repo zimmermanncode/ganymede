@@ -13,5 +13,7 @@ Run Jupyter Process
    ...   ${subcommand}   @{args}
    ...   stdout=stdout.txt   stderr=stderr.txt
 
+   Run Keyword If   ${result.rc} != 0
+   ...   Log   ${result.stderr}   level=ERROR
    Should Be Equal As Integers   ${result.rc}   0
    [Return]   ${result}   ${result.stderr}
