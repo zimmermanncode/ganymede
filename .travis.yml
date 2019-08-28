@@ -25,11 +25,7 @@ install:
   - python -m pip install -U tox tox-travis
 
 script:
-  - >
-    python -m pytest -vv --doctest-modules ganymede ganymede_widgets test
-        --cov ganymede --cov ganymede_widgets --cov test
-        --cov-report term-missing
-
+  - python -m pytest -vv --doctest-modules ganymede ganymede_widgets test --cov ganymede --cov ganymede_widgets --cov test --cov-report term-missing
   - python -m tox -r -v
 
   - python -m pip uninstall --yes ganymede
