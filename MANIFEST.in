@@ -21,4 +21,4 @@ include ganymede-declarativewidgets/nb-extension/.bowerrc
 recursive-include ganymede-declarativewidgets/nb-extension *.css *.js *.json
 recursive-include ganymede-declarativewidgets/elements *.css *.html *.js
 
-recursive-include ganymede-declarativewidgets_explorer *.html *.js *.json
+recursive-include ganymede-declarativewidgets_explorer *.html *.js *.json *.py
