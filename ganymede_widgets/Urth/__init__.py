@@ -1,13 +1,12 @@
-# from six.moves import builtins
 # from inspect import getargspec
 
-# from moretools import camelize
+import zetup
 # import lxml.etree
+# from moretools import camelize
+# from six.moves import builtins
 
 # from IPython import get_ipython
 # from IPython.display import display, HTML, Javascript
-
-from declarativewidgets import Channels, channel
 
 from .button import Button
 from .channel import Channel
@@ -19,11 +18,25 @@ from .polymer import Polymer
 from .template import Template
 from .toggle import ToggleButton
 
-__all__ = (
+
+class Package(zetup.package):
+
+    @property
+    def Channels(self):
+        import declarativewidgets
+
+        return declarativewidgets.Channels
+
+    @property
+    def channel(self):
+        import declarativewidgets
+
+        return declarativewidgets.channel
+
+
+Package(__name__, [
     'Element', 'Channel', 'Container', 'HBox', 'VBox', 'ToggleButton',
-    'Component', 'Import', 'Polymer', 'Template', 'Button', 'Label',
-    # from declarativewidgets
-    'Channels', 'channel')
+    'Component', 'Import', 'Polymer', 'Template', 'Button', 'Label'])
 
 
 # class component(object):

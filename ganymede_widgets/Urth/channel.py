@@ -6,8 +6,6 @@ import zetup
 from moretools import isdict
 from six import with_metaclass
 
-import declarativewidgets
-
 from .element import Element
 
 
@@ -41,6 +39,9 @@ class Channel(with_metaclass(Meta, Element, MutableMapping)):
             self._items = dict(items)
         super(Channel, self).__init__(
             'urth-core-channel', children=children, **html_attrs)
+
+        import declarativewidgets
+
         self._channel = declarativewidgets.channel(name)
         self._handlers = {}
 
