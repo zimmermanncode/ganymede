@@ -26,10 +26,9 @@ install:
 
 script:
   - >
-    python -m pytest -vv --doctest-modules
-        ganymede ganymede_static ganymede_widgets test
-        --cov ganymede --cov ganymede_static --cov ganymede_widgets
-        --cov test --cov-report term-missing
+    python -m pytest -vv --doctest-modules ganymede ganymede_widgets test
+        --cov ganymede --cov ganymede_widgets --cov test
+        --cov-report term-missing
 
   - python -m tox -r -v
 
