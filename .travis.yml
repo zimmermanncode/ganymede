@@ -25,7 +25,12 @@ install:
   - python -m pip install -U tox tox-travis
 
 script:
-  - python -m pytest -vv --doctest-modules ganymede test --cov ganymede --cov test --cov-report term-missing
+  - >
+    python -m pytest -vv --doctest-modules
+        ganymede ganymede_static ganymede_widgets test
+        --cov ganymede --cov ganymede_static --cov ganymede_widgets
+        --cov test --cov-report term-missing
+
   - python -m tox -r -v
   - lynx -dump /home/travis/build/zimmermanncode/ganymede/test/log.html
 
