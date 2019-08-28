@@ -3,7 +3,7 @@
 from collections import MutableMapping
 
 import zetup
-from moretools import isdict
+from moretools import dictitems, isdict
 from six import with_metaclass
 
 from .element import Element
@@ -31,12 +31,14 @@ class Meta(type(Element)):
 class Channel(with_metaclass(Meta, Element, MutableMapping)):
 
     def __init__(self, name, items=None, **html_attrs):
+        cls = type(self)
         html_attrs.setdefault('name', name)
+
         children = []
-        if items is None:
-            self._items = {}
-        else:
-            self._items = dict(items)
+        self._items = dict(items) if items is not None else {}
+        for key, value in dictitems(self._items):
+            children.append(cls.Item(key, value))
+
         super(Channel, self).__init__(
             'urth-core-channel', children=children, **html_attrs)
 
