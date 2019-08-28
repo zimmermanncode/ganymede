@@ -32,7 +32,6 @@ script:
         --cov test --cov-report term-missing
 
   - python -m tox -r -v
-  - lynx -dump /home/travis/build/zimmermanncode/ganymede/test/log.html
 
   - python -m pip uninstall --yes ganymede
   - python -m pip install zetup[all]
