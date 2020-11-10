@@ -1,6 +1,8 @@
 
 # ![](https://bitbucket.org/userzimmermann/ganymede/raw/default/ganymede/static/ganymede.svg) Ganymede | Hacking Jupyter's atmosphere
 
+[![Join the chat at https://gitter.im/zimmermanncode/ganymede](https://badges.gitter.im/zimmermanncode/ganymede.svg)](https://gitter.im/zimmermanncode/ganymede?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![](http://www.gnu.org/graphics/gplv3-88x31.png)](
   https://gnu.org/licenses/lgpl.html)
 [![](https://img.shields.io/pypi/pyversions/ganymede.svg)](
